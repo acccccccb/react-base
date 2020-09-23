@@ -1,12 +1,10 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import store from '../../store/index'
 import './App.scss'
 import HeadMenu from '../../base/HeadMenu'
 import SideMenu from '../../base/SideMenu'
 import Home from '../App/Home/Home'
 import List from './List/List'
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Layout,Breadcrumb } from "antd";
 const { Header, Footer, Sider,Content } = Layout;
 function handlePress(){

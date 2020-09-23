@@ -1,4 +1,4 @@
-import { createStore, combineReducers } from "redux";
+import { createStore } from "redux";
 
 const store = createStore(()=>{
     return {
