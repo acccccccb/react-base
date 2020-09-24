@@ -1,6 +1,13 @@
-import { createStore } from "redux";
-
-const store = createStore(()=>{
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+// import { createDevTools } from "redux-devtools";
+// import LogMonitor from 'redux-devtools-log-monitor'
+// import DockMonitor from 'redux-devtools-dock-monitor'
+import logger from 'redux-logger'
+const composeEnhancers = composeWithDevTools({
+    // Specify name here, actionsBlacklist, actionsCreators and other options if needed
+});
+const reducer = ()=>{
     return {
         baseURL:'',
         token:'',
@@ -47,5 +54,12 @@ const store = createStore(()=>{
             }
         ]
     }
-});
+};
+const store = createStore(
+    reducer,
+    composeEnhancers(
+        applyMiddleware(logger),
+        // other store enhancers if any
+    )
+);
 export default store

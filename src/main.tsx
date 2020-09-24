@@ -1,19 +1,12 @@
-// import { createDevTools } from "redux-devtools";
-// import LogMonitor from 'redux-devtools-log-monitor'
-// import DockMonitor from 'redux-devtools-dock-monitor'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
-// import store from './store/index'
 import 'antd/dist/antd.css';
 import './assets/scss/base.scss';
 import App from './pages/App/App'
 import * as serviceWorker from './serviceWorker';
-// const DevTools = createDevTools(
-//   <DockMonitor toggleVisibilityKey="ctrl-h" changePositionKey="ctrl-q">
-//       <LogMonitor theme="tomorrow" preserveScrollTop={false}></LogMonitor>
-//   </DockMonitor>
-// );
+require('./mock/index');
+
 ReactDOM.render((
         <Router>
             <Route path="/" component={App}></Route>

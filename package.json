@@ -59,6 +59,8 @@
     "react-router-dom": "^5.2.0",
     "react-router-redux": "^4.0.8",
     "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-logger": "^3.0.6",
     "resolve": "1.15.0",
     "resolve-url-loader": "3.1.1",
     "sass-loader": "8.0.2",
@@ -94,10 +96,8 @@
     ]
   },
   "devDependencies": {
-    "node-sass": "^4.14.1",
-    "redux-devtools": "^3.7.0",
-    "redux-devtools-dock-monitor": "^1.2.0",
-    "redux-devtools-log-monitor": "^2.1.0"
+    "mockjs": "^1.1.0",
+    "node-sass": "^4.14.1"
   },
   "jest": {
     "roots": [
