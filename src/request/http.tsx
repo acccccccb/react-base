@@ -1,7 +1,20 @@
 import axios from 'axios'
 import store from '../store/index';
 
-let baseURL = store.getState().baseURL;
+declare module 'axios' {
+    export interface AxiosInstance {
+        request<T = any> (config: AxiosRequestConfig): Promise<T>;
+        get<T = any>(url: string, config?: AxiosRequestConfig): Promise<T>;
+        delete<T = any>(url: string, config?: AxiosRequestConfig): Promise<T>;
+        head<T = any>(url: string, config?: AxiosRequestConfig): Promise<T>;
+        post<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T>;
+        put<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T>;
+        patch<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T>;
+    }
+}
+
+// let baseURL = store.getState().baseURL || '';
+let baseURL = '';
 let $http = axios.create({
     baseURL: baseURL,
     headers: {
@@ -14,8 +27,8 @@ $http.interceptors.request.use(function (config) {
         'Content-Type': 'application/x-www-form-urlencoded'
     };
     // config.withCredentials = true;
-    let  token = store.getState().token;
-    // let  token = sessionStorage.getItem('token');
+    // let  token = store.getState().token;
+    let  token = sessionStorage.getItem('token');
     if(token) {
         config.headers.token =  token;
     }

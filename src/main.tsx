@@ -1,4 +1,6 @@
 import React from 'react';
+import { Provider } from 'react-redux'
+import store from './store/index'
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
 import 'antd/dist/antd.css';
@@ -6,11 +8,13 @@ import './assets/scss/base.scss';
 import App from './pages/App/App'
 import * as serviceWorker from './serviceWorker';
 require('./mock/index');
-
+console.log(store);
 ReactDOM.render((
+    <Provider store={ store }>
         <Router>
             <Route path="/" component={App}></Route>
         </Router>
+    </Provider>
     ),document.getElementById('root')
 );
 
