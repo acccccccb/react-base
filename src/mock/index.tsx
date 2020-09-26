@@ -3,7 +3,11 @@ import Mock from 'mockjs'
 Mock.setup({
     timeout: 80
 });
-
+Mock.mock('/isLogin','get',{
+    code:200,
+    success:true,
+    msg:'已登录',
+});
 Mock.mock('/login','post',{
     code:200,
     success:true,
@@ -29,6 +33,12 @@ Mock.mock('/menuList','get',{
                 name:'首页',
                 type:2,
                 url:'/Home',
+            },
+            {
+                id:8,
+                name:'登录',
+                type:2,
+                url:'/Login',
             },
             {
                 id:2,

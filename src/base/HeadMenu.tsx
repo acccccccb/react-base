@@ -7,7 +7,7 @@ function HeadMenu(props){ // 无状态组件
     return (
         <Menu theme={theme} mode="horizontal" defaultSelectedKeys={['1']}>
             {
-                store.getState().menuList.map(item => (
+                store.getState().tabList.map(item => (
                     <Menu.Item key={item.id}>
                         <Link to={item.url}>{item.name}</Link>
                     </Menu.Item>

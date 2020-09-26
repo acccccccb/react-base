@@ -7,3 +7,8 @@ export const setMenuList = menuList => ({
     type: types.SET_MENULIST,
     menuList
 });
+
+export const tabList = tabList => ({
+    type: types.SET_TABLIST,
+    tabList
+});

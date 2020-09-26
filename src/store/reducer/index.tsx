@@ -27,9 +27,24 @@ let menuList = (state=[],action) =>{
     }
 };
 
+let tabList = (state=[
+    {
+        id:1,
+        url:'/Home',
+        name:'首页'
+    }
+],action) =>{
+    switch (action.type) {
+        case actionTypes.SET_TABLIST:
+            return action.tabList;
+        default:
+            return state;
+    }
+};
+
 // let rootReducer = combineReducers({
 //     token,baseURL,menuList
 // });
 export default combineReducers({
-    token,baseURL,menuList
+    token,baseURL,menuList,tabList
 });
