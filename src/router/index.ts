@@ -1,14 +1,18 @@
-
-import App from '../pages/App/App'
-import List from '../pages/App/List/List'
+import React from "react";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
 const routes = [
     {
         path:'/',
-        component: App,
+        component: ()=>import('../pages/App/App'),
     },
     {
         path:'/List',
-        component: List,
+        component: ()=>import('../pages/App/List/List'),
     }
 ];
 

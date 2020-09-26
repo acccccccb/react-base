@@ -8,14 +8,22 @@ import './assets/scss/base.scss';
 import App from './pages/App/App'
 import * as serviceWorker from './serviceWorker';
 require('./mock/index');
-console.log(store);
-ReactDOM.render((
-    <Provider store={ store }>
-        <Router>
-            <Route path="/" component={App}></Route>
-        </Router>
-    </Provider>
-    ),document.getElementById('root')
+
+class Main extends React.Component {
+    // 组件初始化或更新都会执行, 在componentDidMount前和shouldComponentUpdate(需返回true)后执行
+    render(){
+        return (
+            <Provider store={ store } >
+                <Router>
+                    <Route path="/" component={App}></Route>
+                </Router>
+            </Provider>
+        )
+    }
+}
+ReactDOM.render(
+    <Main/>,
+    document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

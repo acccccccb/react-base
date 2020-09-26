@@ -13,8 +13,8 @@ declare module 'axios' {
     }
 }
 
-// let baseURL = store.getState().baseURL || '';
-let baseURL = '';
+let baseURL = store.getState().baseURL || '';
+// let baseURL = '';
 let $http = axios.create({
     baseURL: baseURL,
     headers: {
@@ -27,8 +27,8 @@ $http.interceptors.request.use(function (config) {
         'Content-Type': 'application/x-www-form-urlencoded'
     };
     // config.withCredentials = true;
-    // let  token = store.getState().token;
-    let  token = sessionStorage.getItem('token');
+    let  token = store.getState().token;
+    // let  token = sessionStorage.getItem('token');
     if(token) {
         config.headers.token =  token;
     }
