@@ -1,0 +1,14 @@
+@import "color";
+.side-menu {
+  a {
+    display:inline-block;
+    background:none;
+    padding-left:20px;
+    padding-right:20px;
+    color:$menuTextColor;
+  }
+  .side-menu-active {
+    background:$mainColor;
+    color:$menuTextActiveColor;
+  }
+}

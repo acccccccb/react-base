@@ -1,11 +1,12 @@
 import Mock from 'mockjs'
-
+const Random = Mock.Random;
 Mock.setup({
     timeout: 80
 });
 Mock.mock('/isLogin','get',{
-    code:200,
+    code:2000,
     success:true,
+    token:Random.string('lower',32),
     msg:'已登录',
 });
 Mock.mock('/login','post',{
@@ -35,51 +36,11 @@ Mock.mock('/menuList','get',{
                 url:'/Home',
             },
             {
-                id:8,
-                name:'登录',
-                type:2,
-                url:'/Login',
-            },
-            {
                 id:2,
-                name:'分组1',
-                type:1,
-                url:'/Home',
-                children:[
-                    {
-                        id:3,
-                        name:'菜单1',
-                        type:2,
-                        url:'/Home',
-                    },
-                    {
-                        id:4,
-                        name:'菜单2',
-                        type:2,
-                        url:'/List',
-                    }
-                ]
-            },
-            {
-                id:5,
-                name:'分组2',
-                type:1,
+                name:'列表',
+                type:2,
                 url:'/List',
-                children:[
-                    {
-                        id:6,
-                        name:'菜单3',
-                        type:2,
-                        url:'/Home',
-                    },
-                    {
-                        id:7,
-                        name:'菜单4',
-                        type:2,
-                        url:'/List',
-                    }
-                ]
-            }
+            },
         ],
     },
 });

@@ -1,36 +1,20 @@
 import React from 'react';
 import store from '../../store/index'
 import { Route } from 'react-router-dom';
+import routers from '../../router/index'
 import './App.scss'
 import HeadMenu from '../../base/HeadMenu'
 import SideMenu from '../../base/SideMenu'
-import Home from '../App/Home/Home'
-import List from './List/List'
-import Login from './Login/Login'
-import $http from '../../request/http'
-import { Dispatch } from 'redux'
 import { Layout,Breadcrumb } from "antd";
 import { connect } from 'react-redux'
-import {setMenuList, setToken} from "../../store/action";
+import { setToken, setMenuList } from "../../store/action";
+import $http from '../../request/http'
 const { Header, Footer, Sider,Content } = Layout;
 
-const mapDispatchProps = dispatch => {
-    dispatch(setToken(Math.random()));
-    return;
-};
 class App extends React.Component {
     // 组件初始化执行, 并且只执行一次
     componentDidMount() {
         console.log('组件初始化执行, 并且只执行一次');
-        console.log(this.props);
-        // const dispatch = this.props;
-        // dispatch(setToken(Math.random()));
-        // function getMenuList(){
-        //     $http.get('/menuList').then((res)=>{
-        //         dispatch(setMenuList(res.obj.rows));
-        //     });
-        // }
-        // getMenuList();
     }
     // 组件卸载的时候才会执行, 可以做销毁动作
     componentWillUnmount() {
@@ -45,11 +29,25 @@ class App extends React.Component {
     // 挂载
     constructor(props) {
         console.log('挂载');
-        super(props);
-        this.state = {
-            isLogin:false,
-            tabList:store.getState().tabList
+        const checkLogin = () => {
+            $http.get('/isLogin').then((res)=>{
+                let token = res.token || '';
+                if(token && res.success===true) {
+                    store.dispatch(setToken(token));
+                    $http.get('/menuList').then((res)=>{
+                        store.dispatch(setMenuList(res.obj.rows));
+                        props.history.push(routers.Home.path);
+                    });
+                } else {
+                    // 清空
+                    store.dispatch(setMenuList([]));
+                    store.dispatch(setToken(''));
+                    props.history.push(routers.Login.path);
+                }
+            });
         };
+        checkLogin();
+        super(props);
     }
 
     render() {
@@ -63,7 +61,7 @@ class App extends React.Component {
                         </Sider>
                         <Layout>
                             <Header style={{ padding:0 }}>
-                                <HeadMenu theme="dark"/>
+                                <HeadMenu/>
                             </Header>
                             <Content style={{ padding:'15px' }}>
                                 <Breadcrumb style={{ margin: '16px 0' }}>
@@ -72,8 +70,8 @@ class App extends React.Component {
                                     <Breadcrumb.Item>App</Breadcrumb.Item>
                                 </Breadcrumb>
                                 <div className="site-layout-content">
-                                    <Route path="/Home" component={Home}/>
-                                    <Route path="/List" component={List}/>
+                                    <Route path={routers.Home.path} exact component={routers.Home.component}/>
+                                    <Route path={routers.List.path} exact component={routers.List.component}/>
                                 </div>
                             </Content>
                             <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
@@ -84,7 +82,7 @@ class App extends React.Component {
         } else {
             return(
                 <div className="App" style={{ height:'100%' }}>
-                    <Route path="*" component={Login}/>
+                    <Route path={routers.Login.path} component={routers.Login.component}/>
                 </div>
             )
         }
@@ -93,5 +91,5 @@ class App extends React.Component {
 
 const state = state => (state);
 export default connect(
-    state,mapDispatchProps
+    state
 )(App);

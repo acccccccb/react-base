@@ -1,19 +1,33 @@
-import React from "react";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
-const routes = [
-    {
+import App from '../pages/App/App'
+import Home from '../pages/App/Home/Home'
+import List from '../pages/App/List/List'
+import Login from '../pages/App/Login/Login'
+import NoMatch from '../pages/App/NoMatch/NoMatch'
+const routes = {
+    App:{
         path:'/',
-        component: ()=>import('../pages/App/App'),
+        exact: false,
+        component: App,
     },
-    {
+    Login:{
+        path:'/Login',
+        exact: false,
+        component: Login,
+    },
+    Home:{
+        path:'/Home',
+        exact: false,
+        component: Home,
+    },
+    List:{
         path:'/List',
-        component: ()=>import('../pages/App/List/List'),
-    }
-];
-
+        exact: false,
+        component: List,
+    },
+    NoMatch:{
+        path:'/*',
+        exact: false,
+        component: NoMatch,
+    },
+};
 export default routes;

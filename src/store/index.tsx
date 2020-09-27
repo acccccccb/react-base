@@ -18,7 +18,8 @@ const store = createStore(
     )
 );
 store.subscribe(()=>{
-    console.log('state状态改变了，新状态如下');
-    console.log(store.getState());
+    // state 更新事件
+    // console.log('state状态改变了，新状态如下');
+    // console.log(store.getState());
 });
 export default store

@@ -8,7 +8,15 @@ export const setMenuList = menuList => ({
     menuList
 });
 
-export const tabList = tabList => ({
+export const setTabList = tabList => ({
     type: types.SET_TABLIST,
     tabList
+});
+export const addTabList = tabList => ({
+    type: types.ADD_TABLIST,
+    tabList
+});
+export const removeTabList = tabIndex => ({
+    type: types.REMOVE_TABLIST,
+    tabIndex
 });

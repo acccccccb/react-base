@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
 import 'antd/dist/antd.css';
 import './assets/scss/base.scss';
-import App from './pages/App/App'
+import routers from './router/index'
 import * as serviceWorker from './serviceWorker';
 require('./mock/index');
 
@@ -15,7 +15,7 @@ class Main extends React.Component {
         return (
             <Provider store={ store } >
                 <Router>
-                    <Route path="/" component={App}></Route>
+                    <Route path={routers.App.path} exact={routers.App.exact} component={routers.App.component}></Route>
                 </Router>
             </Provider>
         )

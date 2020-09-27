@@ -1,19 +1,46 @@
 import React from "react";
-import {Menu} from "antd";
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { CloseOutlined } from '@ant-design/icons'
+import '../assets/scss/HeadMenu.scss'
 import store from '../store'
-function HeadMenu(props){ // 无状态组件
-    const { theme } = props;
+import { removeTabList } from "../store/action";
+
+class CloseBtn extends React.Component{
+    constructor(props){
+        super(props);
+        console.log('props',props);
+    }
+    render(){
+        const headMenuItemClose = (index)=>{
+            store.dispatch(removeTabList(index));
+        };
+        // if(this.props.index>0) {
+        //     return (
+        //         <CloseOutlined onClick={()=>{headMenuItemClose(props.index)}} className="head-menu-item-close"></CloseOutlined>
+        //     )
+        // } else {
+        //     return(null);
+        // }
+        return(
+            <CloseOutlined onClick={()=>{headMenuItemClose(1)}} className="head-menu-item-close"></CloseOutlined>
+        );
+    }
+}
+function HeadMenu(){ // 无状态组件
     return (
-        <Menu theme={theme} mode="horizontal" defaultSelectedKeys={['1']}>
+        <div className="head-menu">
             {
-                store.getState().tabList.map(item => (
-                    <Menu.Item key={item.id}>
-                        <Link to={item.url}>{item.name}</Link>
-                    </Menu.Item>
+                store.getState().tabList.map((item,index) => (
+                    <NavLink
+                        key={item.id}
+                        to={item.url}
+                    >
+                        {item.name}
+                        <CloseBtn></CloseBtn>
+                    </NavLink>
                 ))
             }
-        </Menu>
+        </div>
     )
 }
 export default HeadMenu
