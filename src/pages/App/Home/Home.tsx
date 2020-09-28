@@ -8,11 +8,14 @@ const TabPane = Tabs.TabPane;
 const { Column } = Table;
 
 class Home extends React.Component{
+    // 初始data
     state = {
         dataSource:[],
         result:'noResult',
         modalVisible:false,
     };
+
+    // methods
     showModal = () => {
         this.setState({
             modalVisible: true,
@@ -66,9 +69,10 @@ class Home extends React.Component{
         message.success('修改成功');
         store.dispatch(setToken(Math.random()));
     }
+    // 生命周期
     componentDidMount(){
         let data:any[] = [];
-        for(let i=0;i<100;i++) {
+        for(let i=0;i<10000;i++) {
             data.push({
                 key: i,
                 firstName: 'John-'+i,

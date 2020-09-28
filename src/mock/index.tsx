@@ -41,12 +41,6 @@ Mock.mock('/menuList','get',{
                 type:2,
                 path:'/List',
             },
-            {
-                id:3,
-                name:'Login',
-                type:2,
-                path:'/Login',
-            },
         ],
     },
 });

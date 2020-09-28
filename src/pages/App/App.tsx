@@ -6,7 +6,7 @@ import routers from '../../router/index'
 import HeadMenu from '../../base/HeadMenu'
 import SideMenu from '../../base/SideMenu'
 import BreadCrumb from '../../base/BreadCrumb'
-import { Layout } from "antd";
+import { Layout,Affix } from "antd";
 import { connect } from 'react-redux'
 import { setToken, setMenuList } from "../../store/action";
 import $http from '../../request/http'
@@ -67,9 +67,11 @@ class App extends React.Component {
                             <SideMenu/>
                         </Sider>
                         <Layout>
-                            <Header style={{ padding:0 }}>
-                                <HeadMenu/>
-                            </Header>
+                            <Affix offsetTop={0.1}>
+                                <Header style={{ padding:0 }}>
+                                    <HeadMenu/>
+                                </Header>
+                            </Affix>
                             <Content style={{ padding:'15px' }}>
                                 <BreadCrumb></BreadCrumb>
                                 {this.state['routers']}
