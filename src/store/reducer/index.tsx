@@ -30,7 +30,7 @@ let menuList = (state=[],action) =>{
 let tabList = (state=[
     {
         id:1,
-        url:'/Home',
+        path:'/Home',
         name:'首页'
     },
 ],action) =>{
@@ -38,7 +38,6 @@ let tabList = (state=[
         case actionTypes.SET_TABLIST:
             return action.tabList;
         case actionTypes.ADD_TABLIST:
-            console.log(action.tabList);
             let filter = state.filter((item)=>{
                 return item.id===action.tabList.id;
             });
@@ -63,5 +62,5 @@ let tabList = (state=[
 //     token,baseURL,menuList
 // });
 export default combineReducers({
-    token,baseURL,menuList,tabList
+    token,baseURL,menuList,tabList,
 });

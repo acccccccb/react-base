@@ -4,14 +4,14 @@ Mock.setup({
     timeout: 80
 });
 Mock.mock('/isLogin','get',{
-    code:2000,
+    code:200,
     success:true,
-    token:Random.string('lower',32),
     msg:'已登录',
 });
 Mock.mock('/login','post',{
     code:200,
     success:true,
+    token:Random.string('lower',32),
     msg:'登录成功',
 });
 Mock.mock('/config','get',{
@@ -31,15 +31,21 @@ Mock.mock('/menuList','get',{
         rows:[ // 1：分组   2：菜单
             {
                 id:1,
-                name:'首页',
+                name:'Home',
                 type:2,
-                url:'/Home',
+                path:'/Home',
             },
             {
                 id:2,
-                name:'列表',
+                name:'List',
                 type:2,
-                url:'/List',
+                path:'/List',
+            },
+            {
+                id:3,
+                name:'Login',
+                type:2,
+                path:'/Login',
             },
         ],
     },

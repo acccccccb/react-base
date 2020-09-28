@@ -9,7 +9,6 @@ import reducer from './reducer/index'
 const composeEnhancers = composeWithDevTools({
     // Specify name here, actionsBlacklist, actionsCreators and other options if needed
 });
-
 const store = createStore(
     reducer,
     composeEnhancers(

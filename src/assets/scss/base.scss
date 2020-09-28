@@ -1,2 +1,6 @@
 // base scss
 @import "color";
+#root:before,.App:before {
+  content:'';
+  display:table;
+}

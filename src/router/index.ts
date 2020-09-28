@@ -10,23 +10,27 @@ const routes = {
         component: App,
     },
     Login:{
+        name:'登录',
         path:'/Login',
-        exact: false,
+        exact: true,
         component: Login,
     },
     Home:{
+        name:'主页',
         path:'/Home',
-        exact: false,
+        exact: true,
         component: Home,
     },
     List:{
+        name:'列表',
         path:'/List',
-        exact: false,
+        exact: true,
         component: List,
     },
     NoMatch:{
-        path:'/*',
-        exact: false,
+        name:'404',
+        path:'/NoMatch',
+        exact: true,
         component: NoMatch,
     },
 };

@@ -1,11 +1,12 @@
+import './App.scss'
 import React from 'react';
 import store from '../../store/index'
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import routers from '../../router/index'
-import './App.scss'
 import HeadMenu from '../../base/HeadMenu'
 import SideMenu from '../../base/SideMenu'
-import { Layout,Breadcrumb } from "antd";
+import BreadCrumb from '../../base/BreadCrumb'
+import { Layout } from "antd";
 import { connect } from 'react-redux'
 import { setToken, setMenuList } from "../../store/action";
 import $http from '../../request/http'
@@ -29,30 +30,36 @@ class App extends React.Component {
     // 挂载
     constructor(props) {
         console.log('挂载');
+        super(props);
+        let _this = this;
+        _this.state =  {
+            routers:[],
+        };
         const checkLogin = () => {
-            $http.get('/isLogin').then((res)=>{
-                let token = res.token || '';
-                if(token && res.success===true) {
-                    store.dispatch(setToken(token));
-                    $http.get('/menuList').then((res)=>{
-                        store.dispatch(setMenuList(res.obj.rows));
-                        props.history.push(routers.Home.path);
-                    });
-                } else {
-                    // 清空
-                    store.dispatch(setMenuList([]));
-                    store.dispatch(setToken(''));
-                    props.history.push(routers.Login.path);
-                }
-            });
+            let token = store.getState().token;
+            if(token) {
+                $http.get('/menuList').then((res)=>{
+                    store.dispatch(setMenuList(res.obj.rows));
+                    props.history.push(routers.Home.path);
+                    let routerList = Object.keys(routers);
+                    routerList.splice(0,1);
+                    _this.setState({
+                        routers:routerList,
+                    })
+                });
+            } else {
+                // 清空
+                store.dispatch(setMenuList([]));
+                store.dispatch(setToken(''));
+                props.history.push(routers.Login.path);
+            }
         };
         checkLogin();
-        super(props);
     }
 
     render() {
-        let isLogin = store.getState().token;
-        if(isLogin) {
+        let isLogin = store.getState().menuList;
+        if(isLogin.length>1) {
             return (
                 <div className="App" style={{ height:'100%' }}>
                     <Layout style={{ height:'100%' }}>
@@ -64,14 +71,18 @@ class App extends React.Component {
                                 <HeadMenu/>
                             </Header>
                             <Content style={{ padding:'15px' }}>
-                                <Breadcrumb style={{ margin: '16px 0' }}>
-                                    <Breadcrumb.Item>Home</Breadcrumb.Item>
-                                    <Breadcrumb.Item>List</Breadcrumb.Item>
-                                    <Breadcrumb.Item>App</Breadcrumb.Item>
-                                </Breadcrumb>
+                                <BreadCrumb></BreadCrumb>
+                                {this.state['routers']}
                                 <div className="site-layout-content">
-                                    <Route path={routers.Home.path} exact component={routers.Home.component}/>
-                                    <Route path={routers.List.path} exact component={routers.List.component}/>
+                                    <Switch>
+                                        {
+                                            store.getState().menuList.map((item)=>{
+                                                return(
+                                                    <Route key={item.name} path={routers[item.name].path} exact={routers[item.name].exact} component={routers[item.name].component}/>
+                                                )
+                                            })
+                                        }
+                                    </Switch>
                                 </div>
                             </Content>
                             <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
@@ -80,6 +91,7 @@ class App extends React.Component {
                 </div>
             );
         } else {
+            // 清空
             return(
                 <div className="App" style={{ height:'100%' }}>
                     <Route path={routers.Login.path} component={routers.Login.component}/>

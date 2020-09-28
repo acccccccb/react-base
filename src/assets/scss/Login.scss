@@ -1,0 +1,16 @@
+@import "color";
+.login-card-box {
+  height:100%;
+  position: relative;
+  background:$darkBg;
+  border:1px solid $darkBg;
+  padding:-1px;
+  min-height:600px;
+  .login-card {
+    box-shadow:0 5px 10px rgba(0,0,0,0.1);
+    width:360px;
+    margin-top:15%;
+    margin-left:auto;
+    margin-right:auto;
+  }
+}

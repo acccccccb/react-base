@@ -1,46 +1,45 @@
 import React from "react";
-import { NavLink } from 'react-router-dom';
+import { NavLink,withRouter } from 'react-router-dom';
 import { CloseOutlined } from '@ant-design/icons'
 import '../assets/scss/HeadMenu.scss'
 import store from '../store'
 import { removeTabList } from "../store/action";
 
-class CloseBtn extends React.Component{
-    constructor(props){
-        super(props);
-        console.log('props',props);
-    }
-    render(){
-        const headMenuItemClose = (index)=>{
-            store.dispatch(removeTabList(index));
-        };
-        // if(this.props.index>0) {
-        //     return (
-        //         <CloseOutlined onClick={()=>{headMenuItemClose(props.index)}} className="head-menu-item-close"></CloseOutlined>
-        //     )
-        // } else {
-        //     return(null);
-        // }
+function CloseBtn(props){
+    const headMenuItemClose = (index)=>{
+        let history = props.history;
+        let path = store.getState().tabList[(index>0?index-1:0)].path;
+        console.log(path);
+        history.push(path);
+        store.dispatch(removeTabList(index));
+    };
+    let index = props.index;
+    if(index>0) {
         return(
-            <CloseOutlined onClick={()=>{headMenuItemClose(1)}} className="head-menu-item-close"></CloseOutlined>
-        );
+            <CloseOutlined onClick={()=>{headMenuItemClose(index)}} className="head-menu-item-close head-menu-item-close-active"></CloseOutlined>
+        )
+    } else {
+        return(null)
     }
 }
-function HeadMenu(){ // 无状态组件
+
+function HeadMenu(props){ // 无状态组件
+    let history = props.history;
     return (
         <div className="head-menu">
             {
                 store.getState().tabList.map((item,index) => (
-                    <NavLink
-                        key={item.id}
-                        to={item.url}
-                    >
-                        {item.name}
-                        <CloseBtn></CloseBtn>
-                    </NavLink>
+                    <div className='head-menu-item' key={item.id} >
+                        <NavLink
+                            to={item.path}
+                        >
+                            {item.name}
+                        </NavLink>
+                        <CloseBtn index={index} history={history}></CloseBtn>
+                    </div>
                 ))
             }
         </div>
     )
 }
-export default HeadMenu
+export default withRouter(HeadMenu)

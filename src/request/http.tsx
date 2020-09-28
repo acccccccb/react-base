@@ -56,7 +56,8 @@ $http.interceptors.response.use((res)=>{
                 break;
             case 404:
                 console.log('请求错误,未找到该资源');
-                break;
+                return Promise.reject('请求错误,未找到该资源');
+                // break;
             case 405:
                 console.log('请求方法未允许');
                 break;
