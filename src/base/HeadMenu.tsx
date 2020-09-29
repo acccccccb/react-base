@@ -90,7 +90,7 @@ class HeadMenu extends React.Component <{
                                 >
                                     <i className={item.icon}></i> {item.name}
                                 </NavLink>
-                                <CloseBtn index={index} history={this.props.history}></CloseBtn>
+                                <CloseBtn index={index} history={this.props.history} />
                             </div>
                         ))
                     }
@@ -103,7 +103,7 @@ class HeadMenu extends React.Component <{
                     </div>
                     <div style={{display:'inline-block'}}>
                         <Popover placement="bottom" title={this.state['popover']['title']} content={this.state['popover']['content']} trigger="hover">
-                            <Avatar shape="circle" src={store.getState().userInfo.avatar || '/null'}></Avatar>
+                            <Avatar shape="circle" src={store.getState().userInfo.avatar || '/null'} />
                             <span className="user-name">{store.getState().userInfo.username || '未登录'}</span>
                         </Popover>
                     </div>
