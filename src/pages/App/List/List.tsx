@@ -5,7 +5,6 @@ function List() {
     <div className="List">
         <PageHeader
             className="site-page-header"
-            onBack={() => null}
             title="Title"
             subTitle="This is a subtitle"
         />

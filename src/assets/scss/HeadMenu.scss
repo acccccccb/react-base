@@ -1,43 +1,80 @@
 @import "color";
-.head-menu {
-  .head-menu-item {
-    position:relative;
-    display:inline-block;
-    a {
+.head-menu-box {
+  position:relative;
+  .head-menu {
+    background:#fff;
+    margin-right:150px;
+    overflow:hidden;
+    box-shadow: 0 5px 20px rgba(200,200,200,0.3);
+    .head-menu-item {
+      position:relative;
       display:inline-block;
-      background:none;
-      padding-left:20px;
-      padding-right:20px;
-      color:$menuTextColor;
-    }
-    a.active {
-      background:$mainColor;
-      color:$menuTextActiveColor;
-      .head-menu-item-close-active {
-        opacity: .5;
+      a {
+        display:inline-block;
+        background:none;
+        padding-left:20px;
+        padding-right:20px;
+        color:$menuTextColor;
+        transition: background .5s;
       }
-      .head-menu-item-close-active:hover {
+      a:hover {
+        background:$grayBgLight;
+        transition: background .5s;
+      }
+      a.active {
+        background:$mainColor;
+        color:$menuTextActiveColor;
+        .head-menu-item-close-active {
+          opacity: .5;
+        }
+        .head-menu-item-close-active:hover {
+          opacity: 1;
+        }
+      }
+      .head-menu-item-close {
+        $head-menu-item-close-size:14px;
+        position: absolute;
+        top:2px;
+        right:2px;
+        background:#fff;
+        color:$mainColor;
+        width:$head-menu-item-close-size;
+        height:$head-menu-item-close-size;
+        padding:2px;
+        line-height:10px;
+        font-size:10px;
+        border-radius: 50%;
+        opacity: 0;
+        transition: opacity .5s;
+      }
+      .head-menu-item-close:hover {
         opacity: 1;
       }
     }
-    .head-menu-item-close {
-      $head-menu-item-close-size:14px;
-      position: absolute;
-      top:2px;
-      right:2px;
-      background:#fff;
-      color:$mainColor;
-      width:$head-menu-item-close-size;
-      height:$head-menu-item-close-size;
-      padding:2px;
-      line-height:10px;
-      font-size:10px;
-      border-radius: 50%;
-      opacity: 0;
-      transition: opacity .5s;
-    }
-    .head-menu-item-close:hover {
-      opacity: 1;
+  }
+  .user-info-box {
+    width:150px;
+    height:64px;
+    overflow:hidden;
+    background:#fff;
+    position:absolute;
+    top:0;
+    right:0;
+    padding-left:15px;
+    padding-right:15px;
+    cursor: pointer;
+    .user-name {
+      margin-left:20px;
     }
   }
 }
+.user-info-menu-box {
+  .item {
+    padding:5px 15px;
+    transition: background .5s;
+  }
+  .item:hover {
+    background:$grayBgLight;
+  }
+}
+

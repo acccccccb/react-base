@@ -1,7 +1,15 @@
 $mainColor:#1890ff;
-$menuTextColor: rgba(255, 255, 255, 0.65);
+
+$menuTextColor: #333;
 $menuTextActiveColor:#fff;
+$logoTitleText:#333;
 
-
+// text
+$primaryText:#303133;
+$regularText:#606266;
+$secondaryText:#909399;
+$placeholderText:#C0C4CC;
 //background
 $darkBg:#001529;
+$grayBg:#f0f2f5;
+$grayBgLight:lighten($grayBg,3%);

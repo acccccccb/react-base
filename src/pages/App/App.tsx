@@ -1,4 +1,4 @@
-import './App.scss'
+import '../../assets/scss/App.scss'
 import React from 'react';
 import store from '../../store/index'
 import { Route, Switch } from 'react-router-dom';
@@ -6,7 +6,7 @@ import routers from '../../router/index'
 import HeadMenu from '../../base/HeadMenu'
 import SideMenu from '../../base/SideMenu'
 import BreadCrumb from '../../base/BreadCrumb'
-import { Layout,Affix } from "antd";
+import { Layout } from "antd";
 import { connect } from 'react-redux'
 import { setToken, setMenuList } from "../../store/action";
 import $http from '../../request/http'
@@ -31,63 +31,69 @@ class App extends React.Component {
     constructor(props) {
         console.log('挂载');
         super(props);
-        let _this = this;
-        _this.state =  {
+        this.state =  {
             routers:[],
         };
-        const checkLogin = () => {
-            let token = store.getState().token;
-            if(token) {
-                $http.get('/menuList').then((res)=>{
-                    store.dispatch(setMenuList(res.obj.rows));
-                    props.history.push(routers.Home.path);
-                    let routerList = Object.keys(routers);
-                    routerList.splice(0,1);
-                    _this.setState({
-                        routers:routerList,
-                    })
-                });
-            } else {
-                // 清空
-                store.dispatch(setMenuList([]));
-                store.dispatch(setToken(''));
-                props.history.push(routers.Login.path);
-            }
-        };
-        checkLogin();
+        this.checkLogin();
     }
-
+    checkLogin () {
+        let token = store.getState().token;
+        if(token) {
+            $http.get('/menuList').then((res)=>{
+                store.dispatch(setMenuList(res.obj.rows));
+                this.props['history'].push(routers.Home.path);
+                let routerList = Object.keys(routers);
+                routerList.splice(0,1);
+                this.setState({
+                    routers:routerList,
+                })
+            });
+        } else {
+            // 清空
+            store.dispatch(setMenuList([]));
+            store.dispatch(setToken(''));
+            this.props['history'].push(routers.Login.path);
+        }
+    }
     render() {
-        let isLogin = store.getState().menuList;
-        if(isLogin.length>1) {
+        let menuList = store.getState().menuList;
+        if(menuList.length>1) {
             return (
                 <div className="App" style={{ height:'100%' }}>
                     <Layout style={{ height:'100%' }}>
-                        <Sider>
+                        <Sider className={'app-sider'} theme={'light'}>
                             <SideMenu/>
                         </Sider>
                         <Layout>
-                            <Affix offsetTop={0.1}>
-                                <Header style={{ padding:0 }}>
-                                    <HeadMenu/>
-                                </Header>
-                            </Affix>
-                            <Content style={{ padding:'15px' }}>
+                            <Header style={{ padding:0 }}>
+                                <HeadMenu/>
+                            </Header>
+                            <Content className={'content-body'} style={{ padding:'15px' }}>
                                 <BreadCrumb></BreadCrumb>
                                 {this.state['routers']}
                                 <div className="site-layout-content">
                                     <Switch>
                                         {
                                             store.getState().menuList.map((item)=>{
-                                                return(
-                                                    <Route key={item.name} path={routers[item.name].path} exact={routers[item.name].exact} component={routers[item.name].component}/>
-                                                )
+                                                if(item.type===2) {
+                                                    return(
+                                                        <Route key={item.id} path={routers[item.route].path} exact={routers[item.route].exact} component={routers[item.route].component}/>
+                                                    )
+                                                } else {
+                                                    return(
+                                                        item.children.map((childItem)=>{
+                                                            return(
+                                                                <Route key={childItem.id} path={routers[childItem.route].path} exact={routers[childItem.route].exact} component={routers[childItem.route].component}/>
+                                                            )
+                                                        })
+                                                    )
+                                                }
                                             })
                                         }
                                     </Switch>
                                 </div>
                             </Content>
-                            <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+                            <Footer className={'app-footer'}>Ant Design ©2018 Created by Ant UED</Footer>
                         </Layout>
                     </Layout>
                 </div>

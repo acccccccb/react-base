@@ -1,9 +1,9 @@
+import '../assets/scss/SideMenu.scss'
 import React from "react";
 import store from '../store'
-import { addTabList } from "../store/action";
+import router from '../router/index'
 import { NavLink, withRouter } from 'react-router-dom';
 import { Menu } from "antd";
-import { MailOutlined } from '@ant-design/icons';
 import LogoSvg from "../static/images/logo.svg";
 const { SubMenu } = Menu;
 class SideMenu extends React.Component<{
@@ -15,39 +15,60 @@ class SideMenu extends React.Component<{
     constructor(props) {
         super(props);
         this.props.history.listen((e)=>{
-            let menuList = store.getState().menuList;
-            let selected = menuList.filter((item)=>{
-                return item.path === e.pathname;
+            let obj:any = Object.keys(router);
+            let searchObj = obj.filter((item)=>{
+                return e.pathname === router[item].path;
             });
-            let selectedId = selected[0]?selected[0].id:1;
-            this.setState({
-                selectedKeys:[selectedId.toString()],
-            });
+            if(searchObj.length>0) {
+                let menuList = store.getState().menuList;
+                if(menuList.length>0) {
+                    let searchResult = this.searchObjByRoute(menuList,searchObj[0]);
+                    if(searchResult.length>0) {
+                        this.setState({
+                            selectedKeys:[searchResult[0].id.toString()],
+                        });
+                    }
+                }
+            }
         });
     }
-    render(){
-        const handleMenuClick = ({ item, key, keyPath, domEvent })=>{
-            let menuList = store.getState().menuList;
-            let tabItem = menuList.filter((item)=>{
-                return item.id === parseInt(key);
+    searchObjByRoute (arr,route) {
+        let result:any = [];
+        let list = arr;
+        let loop = (arr,route)=>{
+            arr.forEach((item)=>{
+                if(item.children) {
+                    loop(item.children,route);
+                } else {
+                    if(item.route===route){
+                        result.push(item);
+                    }
+                }
             });
-            if(tabItem.length===1) {
-                store.dispatch(addTabList(tabItem[0]));
-            }
         };
+        loop(list,route);
+        return result;
+    }
+    handleMenuClick ({ item, key, keyPath, domEvent }) {
+        this.setState({
+            selectedKeys:[key],
+        });
+    }
+
+    render(){
         let menuList = store.getState().menuList;
         return(
             <div className="side-menu">
                 <Menu
-                    theme="dark"
+                    theme="light"
                     selectedKeys={this.state['selectedKeys']}
                     defaultOpenKeys={['1']}
                     mode="inline"
-                    onClick={({ item, key, keyPath, domEvent })=>{handleMenuClick({ item, key, keyPath, domEvent })}}
+                    onClick={({ item, key, keyPath, domEvent })=>{this.handleMenuClick({ item, key, keyPath, domEvent })}}
                 >
                     <div className="logo">
                         <img alt="logo" className="logoImg" src={LogoSvg}/>
-                        React
+                        React admin
                     </div>
 
                     {
@@ -55,7 +76,7 @@ class SideMenu extends React.Component<{
                             if(item.type===2) {
                                 return (
                                     <Menu.Item key={item.id}>
-                                        <NavLink activeClassName="side-menu-active" data-id={item.id} to={item.path}>{item.name}</NavLink>
+                                        <NavLink activeClassName="side-menu-active" data-id={item.id} to={router[item.route].path}><i className={item.icon}></i> {item.name}</NavLink>
                                     </Menu.Item>
                                 )
                             } else {
@@ -64,16 +85,13 @@ class SideMenu extends React.Component<{
                                         <SubMenu
                                             key={item.id}
                                             title={
-                                                <span>
-                                                <MailOutlined />
-                                                <span>{item.name}</span>
-                                            </span>
+                                                <span className={item.icon}> {item.name}</span>
                                             }>
                                             {
                                                 item.children.map((childItem)=>{
                                                     return(
                                                         <Menu.Item key={childItem.id}>
-                                                            <NavLink activeClassName="side-menu-active" data-id={childItem.id} to={childItem.path}>{childItem.name}</NavLink>
+                                                            <NavLink activeClassName="side-menu-active" data-id={childItem.id} to={router[childItem.route].path}><i className={childItem.icon}></i> {childItem.name}</NavLink>
                                                         </Menu.Item>
                                                     )
                                                 })

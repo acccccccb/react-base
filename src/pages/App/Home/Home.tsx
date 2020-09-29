@@ -13,6 +13,7 @@ class Home extends React.Component{
         dataSource:[],
         result:'noResult',
         modalVisible:false,
+        tableLoading:false,
     };
 
     // methods
@@ -69,22 +70,22 @@ class Home extends React.Component{
         message.success('修改成功');
         store.dispatch(setToken(Math.random()));
     }
+    getTabData = ()=>{
+        this.setState({
+            tableLoading:true
+        });
+        $http.get('/getTabData').then((res)=>{
+            if(res.success===true) {
+                this.setState({
+                    dataSource:res.obj,
+                    tableLoading:false,
+                })
+            }
+        });
+    };
     // 生命周期
     componentDidMount(){
-        let data:any[] = [];
-        for(let i=0;i<10000;i++) {
-            data.push({
-                key: i,
-                firstName: 'John-'+i,
-                lastName: 'Brown',
-                age: 32,
-                address: 'New York No. 1 Lake Park',
-                tags: ['nice', 'developer'],
-            })
-        }
-        this.setState({
-            dataSource:data
-        })
+        this.getTabData();
     }
     render(){
         return (
@@ -93,7 +94,11 @@ class Home extends React.Component{
                     <TabPane tab="Tab 1" key="1">
                         <Table pagination={{
                             position:['bottomLeft']
-                        }} bordered dataSource={this.state['dataSource']}>
+                        }}
+                               loading={this.state['tableLoading']}
+                               bordered
+                               size={'small'}
+                               dataSource={this.state['dataSource']}>
                             <Column title="First Name" dataIndex="firstName" key="firstName" />
                             <Column title="Last Name" dataIndex="lastName" key="lastName" />
                             <Column title="Age" dataIndex="age" key="age" />

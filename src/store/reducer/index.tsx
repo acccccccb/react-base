@@ -30,13 +30,17 @@ let menuList = (state=[],action) =>{
 let tabList = (state=[
     {
         id:1,
-        path:'/Home',
+        route:'Home',
+        icon:'fa fa-home',
         name:'首页'
     },
 ],action) =>{
     switch (action.type) {
         case actionTypes.SET_TABLIST:
-            return action.tabList;
+            return [
+                ...state,
+                action.tabList
+            ];
         case actionTypes.ADD_TABLIST:
             let filter = state.filter((item)=>{
                 return item.id===action.tabList.id;

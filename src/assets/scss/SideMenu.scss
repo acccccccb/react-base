@@ -1,14 +1,16 @@
 @import "color";
+
 .side-menu {
-  a {
-    display:inline-block;
-    background:none;
-    padding-left:20px;
-    padding-right:20px;
-    color:$menuTextColor;
-  }
-  .side-menu-active {
-    background:$mainColor;
-    color:$menuTextActiveColor;
+  .logo {
+    height:63px;
+    line-height:63px;
+    font-size:22px;
+    color:$logoTitleText;
+    box-shadow: 0 5px 20px rgba(200,200,200,0.6);
+    img.logoImg {
+      width:55px;
+      line-height:0;
+      font-size:0;
+    }
   }
 }
