@@ -1,11 +1,11 @@
 import React from "react";
 import { NavLink,withRouter,Link } from 'react-router-dom';
 import { Avatar, Badge,Popover, Button } from 'antd';
-import { CloseOutlined,UserOutlined } from '@ant-design/icons'
+import { CloseOutlined,UserOutlined,MessageOutlined } from '@ant-design/icons'
 import '../assets/scss/HeadMenu.scss'
 import store from '../store'
 import router from '../router/index'
-import {addTabList,setMenuList, removeTabList, setToken} from "../store/action";
+import {addTabList,setMenuList, removeTabList, setToken,setUserInfo} from "../store/action";
 
 function CloseBtn(props){
     const headMenuItemClose = (index)=>{
@@ -58,6 +58,7 @@ class HeadMenu extends React.Component <{
         store.dispatch(setToken(''));
         // store.dispatch(setTabList(''));
         store.dispatch(setMenuList(''));
+        store.dispatch(setUserInfo({}));
         this.props.history.push(router.Login.path);
     }
     searchObjByRoute (arr,route) {
@@ -95,12 +96,17 @@ class HeadMenu extends React.Component <{
                     }
                 </div>
                 <div className="user-info-box">
-                    <Popover placement="bottom" title={this.state['popover']['title']} content={this.state['popover']['content']} trigger="hover">
-                        <Badge count={1}>
-                            <Avatar shape="square" icon={<UserOutlined />} />
+                    <div style={{marginRight:'15px',display:'inline-block'}}>
+                        <Badge count={1} size="small">
+                            <Button onClick={()=>{this.props.history.push(router.List.path)}} type="primary" shape="circle" icon={<MessageOutlined />} />
                         </Badge>
-                        <span className="user-name">Admin</span>
-                    </Popover>
+                    </div>
+                    <div style={{display:'inline-block'}}>
+                        <Popover placement="bottom" title={this.state['popover']['title']} content={this.state['popover']['content']} trigger="hover">
+                            <Avatar shape="circle" src={store.getState().userInfo.avatar || '/null'}></Avatar>
+                            <span className="user-name">{store.getState().userInfo.username || '未登录'}</span>
+                        </Popover>
+                    </div>
                 </div>
             </div>
         )

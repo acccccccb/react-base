@@ -26,7 +26,14 @@ let menuList = (state=[],action) =>{
             return state;
     }
 };
-
+let userInfo = (state={},action) =>{
+    switch (action.type) {
+        case actionTypes.SET_USER_INFO:
+            return action.userInfo;
+        default:
+            return state;
+    }
+};
 let tabList = (state=[
     {
         id:1,
@@ -66,5 +73,5 @@ let tabList = (state=[
 //     token,baseURL,menuList
 // });
 export default combineReducers({
-    token,baseURL,menuList,tabList,
+    token,baseURL,menuList,tabList,userInfo
 });

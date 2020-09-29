@@ -20,3 +20,7 @@ export const removeTabList = tabIndex => ({
     type: types.REMOVE_TABLIST,
     tabIndex
 });
+export const setUserInfo = userInfo => ({
+    type: types.SET_USER_INFO,
+    userInfo
+});

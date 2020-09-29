@@ -29,7 +29,11 @@ Mock.mock('/login','post',(e)=>{
             {
                 code:200,
                 success:true,
-                token:Random.string('lower',32),
+                obj:{
+                    token:Random.string('lower',32),
+                    username:'admin',
+                    avatar:'https://www.ihtmlcss.com/wp-content/uploads/2018/02/cropped-IMG_6853.jpg',
+                },
                 msg:'登录成功',
             }
         )

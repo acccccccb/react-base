@@ -1,11 +1,13 @@
 import '../../../assets/scss/Login.scss'
 import React from 'react';
+import HeadImg from '../../../static/images/avatar.jpg'
+import Logo from '../../../static/images/logo.svg'
 import { withRouter } from "react-router-dom";
-import { Card,Form, Input, Button,message } from 'antd';
+import {Card, Form, Input, Button, message, Avatar} from 'antd';
 import { UserOutlined, EllipsisOutlined, CheckOutlined } from '@ant-design/icons';
 import $http from '../../../request/http'
 import store from '../../../store/index'
-import { setToken, setMenuList } from "../../../store/action";
+import {setToken, setMenuList, setUserInfo} from "../../../store/action";
 import routers from "../../../router";
 class Login extends React.Component {
     state={
@@ -28,7 +30,11 @@ class Login extends React.Component {
         });
         $http.post('/login',data).then((res)=>{
             if(res.success===true) {
-                store.dispatch(setToken(res.token));
+                store.dispatch(setToken(res.obj.token));
+                store.dispatch(setUserInfo({
+                    username:res.obj.username,
+                    avatar:res.obj.avatar,
+                }));
                 this.getMenuList();
             } else {
                 store.dispatch(setMenuList([]));
@@ -48,7 +54,11 @@ class Login extends React.Component {
     render(){
         return(
             <div className='login-card-box'>
-                <Card className='login-card' title="Login">
+                <Card className='login-card'>
+                    <div className='login-card-logo'>
+                        <Avatar className="spin" size={70} src={Logo} shape="circle"/>
+                        <div className="login-card-title">React admin</div>
+                    </div>
                     <Form
                         initialValues={{
                             username:'admin',

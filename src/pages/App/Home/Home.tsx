@@ -1,7 +1,7 @@
 import React from 'react';
 import store from '../../../store/index'
 import { connect } from 'react-redux'
-import { Button,Tabs,Table,message,Modal  } from 'antd';
+import { Button,Tabs,Table,message,Modal,Tag  } from 'antd';
 import $http from '../../../request/http'
 import { setToken } from '../../../store/action/index'
 const TabPane = Tabs.TabPane;
@@ -102,6 +102,15 @@ class Home extends React.Component{
                             <Column title="First Name" dataIndex="firstName" key="firstName" />
                             <Column title="Last Name" dataIndex="lastName" key="lastName" />
                             <Column title="Age" dataIndex="age" key="age" />
+                            <Column title="category" dataIndex="age" key="age" align="center"
+                                    render={(age) => {
+                                        if(parseInt(age)>40) {
+                                            return(<Tag color="red" key={age}>old</Tag>)
+                                        } else {
+                                            return(<Tag color="blue" key={age}>young</Tag>)
+                                        }
+                                    }}
+                            />
                             <Column title="Address" dataIndex="address" key="address" />
                         </Table>
                     </TabPane>
