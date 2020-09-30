@@ -10,7 +10,7 @@ const toObject = (str)=>{
     return (obj)
 };
 Mock.setup({
-    timeout: 200
+    timeout: '300-800'
 });
 Mock.mock('/isLogin','get',{
     code:200,
@@ -31,8 +31,8 @@ Mock.mock('/login','post',(e)=>{
                 success:true,
                 obj:{
                     token:Random.string('lower',32),
-                    username:'admin',
-                    avatar:'https://www.ihtmlcss.com/wp-content/uploads/2018/02/cropped-IMG_6853.jpg',
+                    username:Random.cname(),
+                    avatar:Random.image('32x32', '#ead6c1',Random.string('upper',1)),
                 },
                 msg:'登录成功',
             }
@@ -87,10 +87,10 @@ Mock.mock('/menuList','get',()=>{
                         children:[
                             {
                                 id:4,
-                                name:'登录',
+                                name:'404',
                                 icon:'fa fa-cube',
                                 type:2,
-                                route:'Login',
+                                route:'NoMatch',
                             },
                         ]
                     },

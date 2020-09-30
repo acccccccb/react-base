@@ -72,13 +72,16 @@ class Login extends React.Component {
                             name="username"
                             rules={[{ required: true, message: 'Please input your username!' }]}>
                             <Input
+                                allowClear
+                                disabled={this.state['loginBtnLoading']}
                                 prefix={<UserOutlined className="site-form-item-icon" />}
                                 placeholder="用户名"/>
                         </Form.Item>
                         <Form.Item
                             name="password"
                             rules={[{ required: true, message: 'Please input your password!' }]}>
-                            <Input
+                            <Input.Password
+                                disabled={this.state['loginBtnLoading']}
                                 prefix={<EllipsisOutlined className="site-form-item-icon" />}
                                 placeholder="密码" type="password"/>
                         </Form.Item>

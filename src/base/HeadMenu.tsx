@@ -5,7 +5,7 @@ import { CloseOutlined,MessageOutlined } from '@ant-design/icons'
 import '../assets/scss/HeadMenu.scss'
 import store from '../store'
 import router from '../router/index'
-import {addTabList,setMenuList, removeTabList, setToken,setUserInfo} from "../store/action";
+import {addTabList,setMenuList,setTabList, removeTabList, setToken,setUserInfo} from "../store/action";
 
 function CloseBtn(props){
     const headMenuItemClose = (index)=>{
@@ -56,8 +56,8 @@ class HeadMenu extends React.Component <{
     }
     loginOut(){
         store.dispatch(setToken(''));
-        // store.dispatch(setTabList(''));
-        store.dispatch(setMenuList(''));
+        store.dispatch(setTabList([]));
+        store.dispatch(setMenuList([]));
         store.dispatch(setUserInfo({}));
         this.props.history.push(router.Login.path);
     }
@@ -96,14 +96,14 @@ class HeadMenu extends React.Component <{
                     }
                 </div>
                 <div className="user-info-box">
-                    <div style={{marginRight:'15px',display:'inline-block'}}>
+                    <div className="user-info-box-1">
                         <Badge count={1} size="small">
                             <Button onClick={()=>{this.props.history.push(router.List.path)}} type="primary" shape="circle" icon={<MessageOutlined />} />
                         </Badge>
                     </div>
-                    <div style={{display:'inline-block'}}>
+                    <div className="user-info-box-2">
                         <Popover placement="bottom" title={this.state['popover']['title']} content={this.state['popover']['content']} trigger="hover">
-                            <Avatar shape="circle" src={store.getState().userInfo.avatar || '/null'} />
+                            <Avatar className="user-avatar" shape="circle" src={store.getState().userInfo.avatar || '/null'} />
                             <span className="user-name">{store.getState().userInfo.username || '未登录'}</span>
                         </Popover>
                     </div>

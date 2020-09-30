@@ -45,6 +45,11 @@ class BreadCrumb extends React.Component <{
             }
         });
     }
+    componentWillUnmount() { // 防止注销后再登录报错
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
     render(){
         return(
             <Breadcrumb separator={'>'} style={{ margin: '16px 0' }}>

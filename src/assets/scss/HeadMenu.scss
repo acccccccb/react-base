@@ -1,11 +1,12 @@
 @import "color";
 .head-menu-box {
-  $userInfoBoxWidth:200px;
+  $userInfoBoxWidth:300px;
   position:relative;
+  overflow: hidden;
+  height: 64px;
   .head-menu {
     background:#fff;
     margin-right:$userInfoBoxWidth;
-    overflow:hidden;
     box-shadow: 0 5px 20px rgba(200,200,200,0.3);
     .head-menu-item {
       position:relative;
@@ -63,11 +64,23 @@
     right:0;
     padding-left:15px;
     padding-right:15px;
-    cursor: pointer;
+    text-align:right;
+    .user-info-box-1 {
+      margin-right:15px;
+      display:inline-block;
+    }
+    .user-info-box-2 {
+      display:inline-block;
+      margin-right:20px;
+      cursor: pointer;
+    }
     .user-name {
       margin-left:10px;
       overflow:hidden;
       text-overflow:ellipsis;
+    }
+    .user-avatar {
+      transform: translateY(-2px);
     }
   }
 }

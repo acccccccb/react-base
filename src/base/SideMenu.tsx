@@ -33,7 +33,12 @@ class SideMenu extends React.Component<{
             }
         });
     }
-    searchObjByRoute (arr,route) {
+    componentWillUnmount() { // 防止注销后再登录报错
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
+        searchObjByRoute (arr,route) {
         let result:any = [];
         let list = arr;
         let loop = (arr,route)=>{

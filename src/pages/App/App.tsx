@@ -81,7 +81,7 @@ class App extends React.Component {
                             </Button>
                         </Sider>
                         <Layout>
-                            <Header style={{ padding:0 }}>
+                            <Header style={{ padding:0,background:'none' }}>
                                 <HeadMenu/>
                             </Header>
                             <Content className={'content-body'} style={{ padding:'15px' }}>
@@ -105,6 +105,7 @@ class App extends React.Component {
                                                 }
                                             })
                                         }
+                                        <Route path="*" component={routers.NoMatch.component}></Route>
                                     </Switch>
                                 </div>
                             </Content>

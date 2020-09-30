@@ -44,10 +44,12 @@ let tabList = (state=[
 ],action) =>{
     switch (action.type) {
         case actionTypes.SET_TABLIST:
-            return [
-                ...state,
-                action.tabList
-            ];
+            return [{
+                id:1,
+                route:'Home',
+                icon:'fa fa-home',
+                name:'首页'
+            }];
         case actionTypes.ADD_TABLIST:
             let filter = state.filter((item)=>{
                 return item.id===action.tabList.id;

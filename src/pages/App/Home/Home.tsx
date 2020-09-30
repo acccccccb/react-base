@@ -17,6 +17,9 @@ class Home extends React.Component{
     };
 
     // methods
+    goTo404 = ()=>{
+      this.props['history'].push('/abcde');
+    };
     showModal = () => {
         this.setState({
             modalVisible: true,
@@ -121,11 +124,12 @@ class Home extends React.Component{
                         <div style={{marginBottom:'50px'}}>
                             TOKEN:{ store.getState().token }
                         </div>
-                        <Button type="primary" onClick={this.get}>发送get请求</Button>
-                        <Button type="primary" onClick={this.post}>发送post请求</Button>
-                        <Button type="primary" onClick={this.changeStore}>修改TOKEN</Button>
-                        <Button type="primary" onClick={this.getMenuList}>修改MENULIST</Button>
-                        <Button type="primary" onClick={this.showModal}>对话框</Button>
+                        <Button style={{marginRight:'10px'}} type="primary" onClick={this.get}>发送get请求</Button>
+                        <Button style={{marginRight:'10px'}} type="primary" onClick={this.post}>发送post请求</Button>
+                        <Button style={{marginRight:'10px'}} type="primary" onClick={this.changeStore}>修改TOKEN</Button>
+                        <Button style={{marginRight:'10px'}} type="primary" onClick={this.getMenuList}>修改MENULIST</Button>
+                        <Button style={{marginRight:'10px'}} type="primary" onClick={this.showModal}>对话框</Button>
+                        <Button style={{marginRight:'10px'}} type="primary" onClick={this.goTo404}>404</Button>
                     </TabPane>
                     <TabPane tab="Tab 3" key="3">
                         Content of Tab Pane 3
