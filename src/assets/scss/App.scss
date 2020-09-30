@@ -11,8 +11,16 @@
       opacity: .3;
       transition: opacity .5s;
     }
-    .collapsed-btn:hover {
+    .collapsed-btn:hover,.change-theme-btn:hover {
       opacity: 1;
+    }
+    .change-theme-btn {
+      position:fixed;
+      bottom:60px;
+      left:22px;
+      z-index:999;
+      opacity: .3;
+      transition: opacity .5s;
     }
   }
   .content-body {

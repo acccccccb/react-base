@@ -1,6 +1,10 @@
 {
   "name": "react-base",
+  "description": "react后台基础框架，包含react-router redux ant-design mock",
   "version": "0.1.0",
+  "author": "acccccccb",
+  "email": "tabzhang@foxmail.com",
+  "license": "Apache 2.0",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.2.2",
@@ -54,6 +58,7 @@
     "postcss-preset-env": "6.7.0",
     "postcss-safe-parser": "4.0.1",
     "react": "^16.13.1",
+    "react-activation": "^0.5.5",
     "react-app-polyfill": "^1.0.6",
     "react-dev-utils": "^10.2.1",
     "react-dom": "^16.13.1",
@@ -157,6 +162,9 @@
   "babel": {
     "presets": [
       "react-app"
+    ],
+    "plugins": [
+      "react-activation/babel"
     ]
   }
 }

@@ -52,7 +52,7 @@ class BreadCrumb extends React.Component <{
     }
     render(){
         return(
-            <Breadcrumb separator={'>'} style={{ margin: '16px 0' }}>
+            <Breadcrumb separator={'>'} style={{ margin: '0 0 10px 0' }}>
                 {
                     this.state['breadCrumbPath'].map((item)=>{
                         return(

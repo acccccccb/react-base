@@ -63,11 +63,12 @@ class SideMenu extends React.Component<{
 
     render(){
         let menuList = store.getState().menuList;
-        let sideMenuClass = this.props['collapsed']?'side-menu side-menu-collapsed':'side-menu';
+        let theme = 'side-menu-'+this.props['theme'];
+        let sideMenuClass = (this.props['collapsed']?'side-menu side-menu-collapsed':'side-menu') + ' ' +theme;
         return(
             <div className={sideMenuClass}>
                 <Menu
-                    theme="light"
+                    theme={this.props['theme']}
                     selectedKeys={this.state['selectedKeys']}
                     defaultOpenKeys={['1']}
                     mode="inline"

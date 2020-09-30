@@ -10,7 +10,7 @@ const toObject = (str)=>{
     return (obj)
 };
 Mock.setup({
-    timeout: '300-800'
+    timeout: '200-600'
 });
 Mock.mock('/isLogin','get',{
     code:200,
@@ -74,15 +74,15 @@ Mock.mock('/menuList','get',()=>{
                     },
                     {
                         id:2,
-                        name:'列表',
+                        name:'更新日志',
                         type:2,
-                        icon:'fa fa-wechat',
+                        icon:'fa fa-calendar',
                         route:'List',
                     },
                     {
                         id:3,
                         name:'菜单组',
-                        icon:'fa fa-car',
+                        icon:'fa fa-bars',
                         type:1,
                         children:[
                             {

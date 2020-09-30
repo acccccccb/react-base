@@ -7,7 +7,7 @@ import HeadMenu from '../../base/HeadMenu'
 import SideMenu from '../../base/SideMenu'
 import BreadCrumb from '../../base/BreadCrumb'
 import { Layout,Button } from "antd"
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
+import { MenuFoldOutlined, MenuUnfoldOutlined,BulbOutlined,BulbFilled } from '@ant-design/icons'
 import { connect } from 'react-redux'
 import { setToken, setMenuList } from "../../store/action"
 import $http from '../../request/http'
@@ -35,6 +35,7 @@ class App extends React.Component {
         this.state =  {
             routers:[],
             collapsed:false,
+            theme:'dark'
         };
         this.checkLogin();
     }
@@ -42,6 +43,12 @@ class App extends React.Component {
         let collapsed = this.state['collapsed'];
         this.setState({
             collapsed:!collapsed
+        })
+    }
+    changeMenuTheme(){
+        let theme = this.state['theme'];
+        this.setState({
+            theme:theme==='dark'?'light':'dark'
         })
     }
     checkLogin () {
@@ -66,17 +73,26 @@ class App extends React.Component {
     render() {
         let menuList = store.getState().menuList;
         let icon = this.state['collapsed']?<MenuFoldOutlined />:<MenuUnfoldOutlined />;
+        let icon2 = this.state['theme']==='dark'?<BulbOutlined />:<BulbFilled />;
         if(menuList.length>1) {
             return (
                 <div className="App" style={{ height:'100%' }}>
                     <Layout style={{ height:'100%' }}>
                         <Sider collapsed={this.state['collapsed']} className={'app-sider'} theme={'light'}>
-                            <SideMenu collapsed={this.state['collapsed']}/>
+                            <SideMenu theme={this.state['theme']} collapsed={this.state['collapsed']}/>
                             <Button
                                 shape="circle"
                                 icon={icon}
                                 onClick={()=>{this.changeMenuCollapsed()}}
                                 className="collapsed-btn"
+                                type="primary">
+                            </Button>
+
+                            <Button
+                                shape="circle"
+                                icon={icon2}
+                                onClick={()=>{this.changeMenuTheme()}}
+                                className="change-theme-btn"
                                 type="primary">
                             </Button>
                         </Sider>

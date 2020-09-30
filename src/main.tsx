@@ -2,7 +2,8 @@ import React from 'react';
 import { Provider } from 'react-redux'
 import store from './store/index'
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Route} from 'react-router-dom'; // HashRouter BrowserRouter
+import { AliveScope } from 'react-activation'
 import 'antd/dist/antd.css';
 import './assets/scss/base.scss';
 import routers from './router/index'
@@ -15,7 +16,9 @@ class Main extends React.Component {
         return (
             <Provider store={ store } >
                 <Router>
-                    <Route path={routers.App.path} exact={routers.App.exact} component={routers.App.component}></Route>
+                    <AliveScope>
+                        <Route path={routers.App.path} exact={routers.App.exact} component={routers.App.component}></Route>
+                    </AliveScope>
                 </Router>
             </Provider>
         )

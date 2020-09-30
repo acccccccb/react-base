@@ -1,6 +1,14 @@
 @import "color";
-
+.side-menu-dark {
+  background:#001529;
+  transition: background .5s;
+  .logo {
+    color:#fff!important;
+    box-shadow: none!important;
+  }
+}
 .side-menu {
+  height:100%;
   .logo {
     height:63px;
     line-height:63px;
