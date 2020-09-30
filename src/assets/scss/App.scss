@@ -3,6 +3,17 @@
   user-select: none;
   .app-sider {
     box-shadow: 5px 0 20px rgba(200,200,200,0.3);
+    .collapsed-btn {
+      position:fixed;
+      bottom:20px;
+      left:22px;
+      z-index:999;
+      opacity: .3;
+      transition: opacity .5s;
+    }
+    .collapsed-btn:hover {
+      opacity: 1;
+    }
   }
   .content-body {
     overflow-y:scroll;

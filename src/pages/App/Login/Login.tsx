@@ -1,6 +1,6 @@
 import '../../../assets/scss/Login.scss'
 import React from 'react';
-import HeadImg from '../../../static/images/avatar.jpg'
+// import HeadImg from '../../../static/images/avatar.jpg'
 import Logo from '../../../static/images/logo.svg'
 import { withRouter } from "react-router-dom";
 import {Card, Form, Input, Button, message, Avatar} from 'antd';

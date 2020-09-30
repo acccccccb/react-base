@@ -11,6 +11,31 @@
       width:55px;
       line-height:0;
       font-size:0;
+      margin-top:-5px;
+      transition: width .3s;
     }
+    span {
+      opacity: 1;
+      transition: opacity 2s;
+    }
+  }
+}
+.side-menu-collapsed {
+  .logo {
+    img.logoImg {
+      width:70px;
+      margin-left:5px;
+    }
+    span {
+      opacity: 0;
+      transition: opacity 1s;
+      display:inline-block;
+      overflow:hidden;
+      position:absolute;
+      width:140px;
+    }
+  }
+  .menu-item-title {
+    display:none;
   }
 }

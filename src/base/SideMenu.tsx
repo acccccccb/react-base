@@ -6,6 +6,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 import { Menu } from "antd";
 import LogoSvg from "../static/images/logo.svg";
 const { SubMenu } = Menu;
+
 class SideMenu extends React.Component<{
     history?:any,
 }> {
@@ -57,8 +58,9 @@ class SideMenu extends React.Component<{
 
     render(){
         let menuList = store.getState().menuList;
+        let sideMenuClass = this.props['collapsed']?'side-menu side-menu-collapsed':'side-menu';
         return(
-            <div className="side-menu">
+            <div className={sideMenuClass}>
                 <Menu
                     theme="light"
                     selectedKeys={this.state['selectedKeys']}
@@ -68,7 +70,7 @@ class SideMenu extends React.Component<{
                 >
                     <div className="logo">
                         <img alt="logo" className="logoImg" src={LogoSvg}/>
-                        React admin
+                        <span>React admin</span>
                     </div>
 
                     {
@@ -76,7 +78,7 @@ class SideMenu extends React.Component<{
                             if(item.type===2) {
                                 return (
                                     <Menu.Item key={item.id}>
-                                        <NavLink activeClassName="side-menu-active" data-id={item.id} to={router[item.route].path}><i className={item.icon}></i> {item.name}</NavLink>
+                                        <NavLink activeClassName="side-menu-active" data-id={item.id} to={router[item.route].path}><i className={item.icon}></i> <span className="menu-item-title">{item.name}</span></NavLink>
                                     </Menu.Item>
                                 )
                             } else {
@@ -85,13 +87,15 @@ class SideMenu extends React.Component<{
                                         <SubMenu
                                             key={item.id}
                                             title={
-                                                <span className={item.icon}> {item.name}</span>
+                                                <span>
+                                                    <i className={item.icon}></i> <span className="menu-item-title"> {item.name}</span>
+                                                </span>
                                             }>
                                             {
                                                 item.children.map((childItem)=>{
                                                     return(
                                                         <Menu.Item key={childItem.id}>
-                                                            <NavLink activeClassName="side-menu-active" data-id={childItem.id} to={router[childItem.route].path}><i className={childItem.icon}></i> {childItem.name}</NavLink>
+                                                            <NavLink activeClassName="side-menu-active" data-id={childItem.id} to={router[childItem.route].path}><i className={childItem.icon}></i> <span className="menu-item-title">{childItem.name}</span></NavLink>
                                                         </Menu.Item>
                                                     )
                                                 })

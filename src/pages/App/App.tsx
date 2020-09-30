@@ -1,14 +1,15 @@
 import '../../assets/scss/App.scss'
-import React from 'react';
+import React from 'react'
 import store from '../../store/index'
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom'
 import routers from '../../router/index'
 import HeadMenu from '../../base/HeadMenu'
 import SideMenu from '../../base/SideMenu'
 import BreadCrumb from '../../base/BreadCrumb'
-import { Layout } from "antd";
+import { Layout,Button } from "antd"
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import { connect } from 'react-redux'
-import { setToken, setMenuList } from "../../store/action";
+import { setToken, setMenuList } from "../../store/action"
 import $http from '../../request/http'
 const { Header, Footer, Sider,Content } = Layout;
 
@@ -33,8 +34,15 @@ class App extends React.Component {
         super(props);
         this.state =  {
             routers:[],
+            collapsed:false,
         };
         this.checkLogin();
+    }
+    changeMenuCollapsed(){
+        let collapsed = this.state['collapsed'];
+        this.setState({
+            collapsed:!collapsed
+        })
     }
     checkLogin () {
         let token = store.getState().token;
@@ -57,12 +65,20 @@ class App extends React.Component {
     }
     render() {
         let menuList = store.getState().menuList;
+        let icon = this.state['collapsed']?<MenuFoldOutlined />:<MenuUnfoldOutlined />;
         if(menuList.length>1) {
             return (
                 <div className="App" style={{ height:'100%' }}>
                     <Layout style={{ height:'100%' }}>
-                        <Sider className={'app-sider'} theme={'light'}>
-                            <SideMenu/>
+                        <Sider collapsed={this.state['collapsed']} className={'app-sider'} theme={'light'}>
+                            <SideMenu collapsed={this.state['collapsed']}/>
+                            <Button
+                                shape="circle"
+                                icon={icon}
+                                onClick={()=>{this.changeMenuCollapsed()}}
+                                className="collapsed-btn"
+                                type="primary">
+                            </Button>
                         </Sider>
                         <Layout>
                             <Header style={{ padding:0 }}>
@@ -70,7 +86,6 @@ class App extends React.Component {
                             </Header>
                             <Content className={'content-body'} style={{ padding:'15px' }}>
                                 <BreadCrumb></BreadCrumb>
-                                {this.state['routers']}
                                 <div className="site-layout-content">
                                     <Switch>
                                         {
