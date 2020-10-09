@@ -8,8 +8,11 @@ import 'antd/dist/antd.css';
 import './assets/scss/base.scss';
 import routers from './router/index'
 import * as serviceWorker from './serviceWorker';
-require('./mock/index');
 
+// 只在开发环境加载mock
+if(process.env.NODE_ENV==='development') {
+    require('./mock/index');
+}
 class Main extends React.Component {
     // 组件初始化或更新都会执行, 在componentDidMount前和shouldComponentUpdate(需返回true)后执行
     render(){

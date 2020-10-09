@@ -9,14 +9,6 @@ let token = (state='',action) =>{
             return state;
     }
 };
-let baseURL = (state='',action) =>{
-    switch (action.type) {
-        case actionTypes.SET_BASEURL:
-            return action.baseURL;
-        default:
-            return state;
-    }
-};
 
 let menuList = (state=[],action) =>{
     switch (action.type) {
@@ -75,5 +67,5 @@ let tabList = (state=[
 //     token,baseURL,menuList
 // });
 export default combineReducers({
-    token,baseURL,menuList,tabList,userInfo
+    token,menuList,tabList,userInfo
 });

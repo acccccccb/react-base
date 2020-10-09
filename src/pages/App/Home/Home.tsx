@@ -98,14 +98,19 @@ class Home extends React.Component{
     }
     post= () =>{
         let _this = this;
-        $http.post('/login',{
+        let data = new URLSearchParams({
             username:'admin',
-            password:123456
-        }).then((res)=>{
-            message.success(res.msg);
-            _this.setState({
-                result:JSON.stringify(res)
-            });
+            password:'123456'
+        });
+        $http.post('/login',data).then((res)=>{
+            if(res.success===true) {
+                message.success(res.msg);
+                _this.setState({
+                    result:JSON.stringify(res)
+                });
+            } else {
+                message.warn(res.msg);
+            }
         });
     }
     modalConfirm = () => {

@@ -13,10 +13,23 @@ declare module 'axios' {
     }
 }
 
-let baseURL = store.getState().baseURL || '';
-// let baseURL = '';
+let baseURL = ()=>{
+    let url = '';
+    switch (process.env.NODE_ENV) {
+        case 'development': // 开发环境
+            url = '';
+            break;
+        case 'production': // 生产环境
+            url = '';
+            break;
+        default:
+            url = '';
+            break;
+    }
+    return url;
+};
 let $http = axios.create({
-    baseURL: baseURL,
+    baseURL: baseURL(),
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
     },
@@ -87,8 +100,9 @@ $http.interceptors.response.use((res)=>{
         }
     } else {
         console.log('连接到服务器失败');
+        return Promise.reject('连接到服务器失败');
     }
-    return Promise.resolve(err.response);
+    return Promise.reject(err.response);
 });
 
 export default $http

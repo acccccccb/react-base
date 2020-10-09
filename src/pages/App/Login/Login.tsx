@@ -64,6 +64,7 @@ class Login extends React.Component {
                             username:'admin',
                             password:'123456',
                         }}
+                        autoComplete="off"
                         name="normal_login"
                         className="login-form"
                         size="large"
