@@ -75,8 +75,8 @@ class SideMenu extends React.Component<{
                     onClick={({ item, key, keyPath, domEvent })=>{this.handleMenuClick({ item, key, keyPath, domEvent })}}
                 >
                     <div className="logo">
-                        <img alt="logo" className="logoImg" src={LogoSvg}/>
-                        <span>React admin</span>
+                        <img alt="logo" className="logo-img" src={LogoSvg}/>
+                        <span className="logo-title">React admin</span>
                     </div>
 
                     {

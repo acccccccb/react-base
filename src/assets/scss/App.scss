@@ -1,26 +1,51 @@
 @import "color";
 .App {
   user-select: none;
+  .app-sider-dark {
+    .collapsed-btn,.change-theme-btn {
+      background:lighten($darkBg,10%);
+      color:#fff;
+    }
+  }
+  .app-sider-light {
+    .collapsed-btn,.change-theme-btn {
+      background:darken(#fff,5%);
+    }
+  }
   .app-sider {
     box-shadow: 5px 0 20px rgba(200,200,200,0.3);
     .collapsed-btn {
-      position:fixed;
-      bottom:20px;
-      left:22px;
-      z-index:999;
+      position: absolute;
+      top:50%;
+      right:0;
+      height:40px;
+      line-height:40px;
+      width:18px;
+      text-align:center;
+      cursor: pointer;
+      transition: opacity .5s,background-color .5s;
+      font-size:.8em;
+      transform: translateY(-50%);
+      border-radius: 3px 0 0 3px;
       opacity: .3;
-      transition: opacity .5s;
     }
     .collapsed-btn:hover,.change-theme-btn:hover {
       opacity: 1;
     }
     .change-theme-btn {
-      position:fixed;
-      bottom:60px;
-      left:22px;
-      z-index:999;
+      transform: translateX(-50%);
+      position: absolute;
+      left:50%;
+      bottom:0;
+      height:18px;
+      line-height:18px;
+      width:40px;
+      text-align:center;
+      cursor: pointer;
+      transition: opacity .5s,background-color .5s;
+      font-size:.8em;
+      border-radius: 3px 3px 0 0;
       opacity: .3;
-      transition: opacity .5s;
     }
   }
   .content-body {

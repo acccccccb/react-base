@@ -1,4 +1,11 @@
 @import "color";
+.logo {
+  position:relative;
+  .logo-title {
+    font-size:.8em;
+  }
+
+}
 .side-menu-dark {
   background:#001529;
   transition: background .5s;
@@ -9,20 +16,21 @@
 }
 .side-menu {
   height:100%;
+  position: relative;
   .logo {
     height:63px;
     line-height:63px;
     font-size:22px;
     color:$logoTitleText;
     box-shadow: 0 5px 20px rgba(200,200,200,0.6);
-    img.logoImg {
+    .logo-img {
       width:55px;
       line-height:0;
       font-size:0;
       margin-top:-5px;
       transition: width .3s;
     }
-    span {
+    .logo-title {
       opacity: 1;
       transition: opacity 2s;
     }
@@ -30,11 +38,11 @@
 }
 .side-menu-collapsed {
   .logo {
-    img.logoImg {
+    .logo-img {
       width:70px;
       margin-left:5px;
     }
-    span {
+    .logo-title {
       opacity: 0;
       transition: opacity 1s;
       display:inline-block;
