@@ -1,5 +1,6 @@
 import axios from 'axios'
 import store from '../store/index';
+import config from '../config/config';
 
 declare module 'axios' {
     export interface AxiosInstance {
@@ -17,10 +18,10 @@ let baseURL = ()=>{
     let url = '';
     switch (process.env.NODE_ENV) {
         case 'development': // 开发环境
-            url = '';
+            url = config.devBaseUrl;
             break;
         case 'production': // 生产环境
-            url = '';
+            url = config.prodBaseUrl;
             break;
         default:
             url = '';
