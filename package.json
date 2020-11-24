@@ -1,6 +1,6 @@
 {
   "name": "react-base",
-  "description": "react后台基础框架，包含react-router redux ant-design mock",
+  "description": "react后台基础框架，包含react-router redux ant-design mock redux-persist",
   "version": "0.1.0",
   "author": "acccccccb",
   "email": "tabzhang@foxmail.com",
