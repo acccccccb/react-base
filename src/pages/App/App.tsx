@@ -6,8 +6,8 @@ import routers from '../../router/index'
 import HeadMenu from '../../base/HeadMenu'
 import SideMenu from '../../base/SideMenu'
 import BreadCrumb from '../../base/BreadCrumb'
-import { Layout,Button } from "antd"
-import { MenuFoldOutlined, MenuUnfoldOutlined,BulbOutlined,BulbFilled,RightOutlined,LeftOutlined } from '@ant-design/icons'
+import { Layout } from "antd"
+import { BulbOutlined,BulbFilled,RightOutlined,LeftOutlined } from '@ant-design/icons'
 import { connect } from 'react-redux'
 import { setToken, setMenuList } from "../../store/action"
 import $http from '../../request/http'

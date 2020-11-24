@@ -1,6 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux'
-import store from './store/index'
+import { PersistGate } from 'redux-persist/integration/react'
+import { store, persistor } from './store/index';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route} from 'react-router-dom'; // HashRouter BrowserRouter
 import { AliveScope } from 'react-activation'
@@ -18,11 +19,13 @@ class Main extends React.Component {
     render(){
         return (
             <Provider store={ store } >
-                <Router>
-                    <AliveScope>
-                        <Route path={routers.App.path} exact={routers.App.exact} component={routers.App.component}></Route>
-                    </AliveScope>
-                </Router>
+                <PersistGate loading={null} persistor={persistor}>
+                    <Router>
+                        <AliveScope>
+                            <Route path={routers.App.path} exact={routers.App.exact} component={routers.App.component}></Route>
+                        </AliveScope>
+                    </Router>
+                </PersistGate>
             </Provider>
         )
     }
