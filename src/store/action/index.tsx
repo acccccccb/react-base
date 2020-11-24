@@ -3,6 +3,18 @@ export const setToken = token => ({
     type: types.SET_TOKEN,
     token
 });
+export const setActiveUrl = activeUrl => ({
+    type: types.SET_ACTIVE_URL,
+    activeUrl
+});
+export const setTheme = theme => ({
+    type: types.SET_THEME,
+    theme
+});
+export const setCollapsed = collapsed => ({
+    type: types.SET_COLLAPSED,
+    collapsed
+});
 export const setMenuList = menuList => ({
     type: types.SET_MENULIST,
     menuList

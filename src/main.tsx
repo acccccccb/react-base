@@ -14,7 +14,9 @@ import * as serviceWorker from './serviceWorker';
 if(process.env.NODE_ENV==='development') {
     require('./mock/index');
 }
-class Main extends React.Component {
+class Main extends React.Component<{
+    history?:any
+}> {
     // 组件初始化或更新都会执行, 在componentDidMount前和shouldComponentUpdate(需返回true)后执行
     render(){
         return (

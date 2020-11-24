@@ -10,6 +10,33 @@ let token = (state='',action) =>{
     }
 };
 
+let activeUrl = (state='/Login',action) =>{
+    switch (action.type) {
+        case actionTypes.SET_ACTIVE_URL:
+            return action.activeUrl;
+        default:
+            return state;
+    }
+};
+
+let theme = (state='light',action) =>{
+    switch (action.type) {
+        case actionTypes.SET_THEME:
+            return action.theme;
+        default:
+            return state;
+    }
+};
+
+let collapsed = (state=false,action) =>{
+    switch (action.type) {
+        case actionTypes.SET_COLLAPSED:
+            return action.collapsed;
+        default:
+            return state;
+    }
+};
+
 let menuList = (state=[],action) =>{
     switch (action.type) {
         case actionTypes.SET_MENULIST:
@@ -67,5 +94,11 @@ let tabList = (state=[
 //     token,baseURL,menuList
 // });
 export default combineReducers({
-    token,menuList,tabList,userInfo
+    token,
+    theme,
+    collapsed,
+    activeUrl,
+    menuList,
+    tabList,
+    userInfo,
 });

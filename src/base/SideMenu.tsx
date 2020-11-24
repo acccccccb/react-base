@@ -5,6 +5,7 @@ import router from '../router/index'
 import { NavLink, withRouter } from 'react-router-dom';
 import { Menu } from "antd";
 import LogoSvg from "../static/images/logo.svg";
+import { setActiveUrl} from "../store/action";
 const { SubMenu } = Menu;
 
 class SideMenu extends React.Component<{
@@ -28,6 +29,8 @@ class SideMenu extends React.Component<{
                         this.setState({
                             selectedKeys:[searchResult[0].id.toString()],
                         });
+                        let path = this.props.history.location.pathname;
+                        store.dispatch(setActiveUrl(path));
                     }
                 }
             }
@@ -38,7 +41,7 @@ class SideMenu extends React.Component<{
             return;
         };
     }
-        searchObjByRoute (arr,route) {
+    searchObjByRoute (arr,route) {
         let result:any = [];
         let list = arr;
         let loop = (arr,route)=>{
