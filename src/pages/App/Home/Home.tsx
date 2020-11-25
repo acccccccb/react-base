@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import { Button,Tabs,Table,message,Modal,Tag,PageHeader, Descriptions  } from 'antd';
 import $http from '../../../request/http'
 import { setToken } from '../../../store/action/index'
-import PerfectScrollbar from 'perfect-scrollbar'
 const TabPane = Tabs.TabPane;
 const { Column } = Table;
 class HomeTable extends React.Component{
@@ -130,13 +129,6 @@ class Home extends React.Component{
     // 生命周期
     componentDidMount(){
         console.log('componentDidMount');
-        const $container = document.getElementById('container');
-        if ($container) {
-            new PerfectScrollbar('#container', {
-                wheelSpeed: 1,
-                wheelPropagation: true
-            });
-        }
     }
     componentWillUnmount(){
         console.log('componentWillUnmount');

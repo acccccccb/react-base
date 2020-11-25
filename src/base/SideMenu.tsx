@@ -13,6 +13,9 @@ class SideMenu extends React.Component<{
 }> {
     state = {
         defaultSelectedKeys:['0'],
+        scroll: {
+            update: () => {}
+        }
     };
     constructor(props) {
         super(props);

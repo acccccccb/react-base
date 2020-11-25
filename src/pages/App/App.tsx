@@ -2,6 +2,7 @@ import '../../assets/scss/App.scss'
 import 'perfect-scrollbar/css/perfect-scrollbar.css'
 import React from 'react'
 import store from '../../store/index'
+import PerfectScrollbar from 'perfect-scrollbar'
 import { Route, Switch } from 'react-router-dom'
 import routers from '../../router/index'
 import HeadMenu from '../../base/HeadMenu'
@@ -18,7 +19,25 @@ class App extends React.Component {
     // 组件初始化执行, 并且只执行一次
     componentDidMount() {
         console.log('组件初始化执行, 并且只执行一次');
+        const $container = document.getElementById('container');
+        if ($container) {
+            const ps = new PerfectScrollbar('#container', {
+                wheelSpeed: 1,
+                wheelPropagation: true,
+                swipeEasing: true
+            });
+            this.setState({
+                scroll: ps
+            })
+        }
     }
+    componentDidUpdate() {
+        const scroll = this.state['scroll'];
+        if(scroll) {
+            scroll.update();
+        }
+    }
+
     // 组件卸载的时候才会执行, 可以做销毁动作
     componentWillUnmount() {
         console.log('组件卸载的时候才会执行');
@@ -61,7 +80,7 @@ class App extends React.Component {
                 routerList.splice(0,1);
                 this.setState({
                     routers:routerList,
-                })
+                });
             });
         } else {
             // 清空
@@ -71,71 +90,72 @@ class App extends React.Component {
         }
     }
     render() {
+        console.log('app render');
         let menuList = store.getState().menuList;
         let theme = store.getState().theme;
         let collapsed = store.getState().collapsed;
         let icon = collapsed?<RightOutlined />:<LeftOutlined />;
         let icon2 = theme === 'dark'?<BulbFilled />:<BulbOutlined />;
-        if(menuList.length>1) {
-            return (
-                <div className="App" style={{ height:'100%' }}>
-                    <Layout style={{ height:'100%' }}>
-                        <Sider collapsed={collapsed} className={'app-sider app-sider-' + theme} theme={'light'}>
-                            <SideMenu theme={theme} collapsed={collapsed}/>
-                            <div
-                                onClick={()=>{this.changeMenuCollapsed()}}
-                                className="collapsed-btn">
-                                {icon}
-                            </div>
-
-                            <div
-                                onClick={()=>{this.changeMenuTheme()}}
-                                className="change-theme-btn">
-                                {icon2}
-                            </div>
-                        </Sider>
-                        <Layout>
-                            <Header style={{ padding:0,background:'none' }}>
-                                <HeadMenu/>
-                            </Header>
-                            <Content id="container" className={'content-body'} style={{ padding:'15px' }}>
-                                <BreadCrumb></BreadCrumb>
-                                <div className="site-layout-content">
-                                    <Switch>
-                                        {
-                                            store.getState().menuList.map((item)=>{
-                                                if(item.type===2) {
-                                                    return(
-                                                        <Route key={item.id} path={routers[item.route].path} exact={routers[item.route].exact} component={routers[item.route].component}/>
-                                                    )
-                                                } else {
-                                                    return(
-                                                        item.children.map((childItem)=>{
-                                                            return(
-                                                                <Route key={childItem.id} path={routers[childItem.route].path} exact={routers[childItem.route].exact} component={routers[childItem.route].component}/>
-                                                            )
-                                                        })
-                                                    )
-                                                }
-                                            })
-                                        }
-                                        <Route path="*" component={routers.NoMatch.component}></Route>
-                                    </Switch>
-                                </div>
-                            </Content>
-                            <Footer className={'app-footer'}>Ant Design ©2018 Created by Ant UED</Footer>
-                        </Layout>
+        let customSider = (
+            <Sider collapsed={collapsed} className={'app-sider app-sider-' + theme} theme={'light'}>
+                <SideMenu theme={theme} collapsed={collapsed}/>
+                <div
+                    onClick={()=>{this.changeMenuCollapsed()}}
+                    className="collapsed-btn">
+                    {icon}
+                </div>
+                <div
+                    onClick={()=>{this.changeMenuTheme()}}
+                    className="change-theme-btn">
+                    {icon2}
+                </div>
+            </Sider>
+        );
+        let customHeader = (
+            <Header style={{ padding:0,background:'none' }}>
+                <HeadMenu/>
+            </Header>
+        );
+        let customBreadCrumb = <BreadCrumb></BreadCrumb>;
+        let customContainer = (
+            <div className="site-layout-content">
+                <Switch>
+                    {
+                        store.getState().menuList.map((item)=>{
+                            if(item.type===2) {
+                                return(
+                                    <Route key={item.id} path={routers[item.route].path} exact={routers[item.route].exact} component={routers[item.route].component}/>
+                                )
+                            } else {
+                                return(
+                                    item.children.map((childItem)=>{
+                                        return(
+                                            <Route key={childItem.id} path={routers[childItem.route].path} exact={routers[childItem.route].exact} component={routers[childItem.route].component}/>
+                                        )
+                                    })
+                                )
+                            }
+                        })
+                    }
+                    <Route path="*" component={routers.NoMatch.component}></Route>
+                </Switch>
+            </div>
+        );
+        return (
+            <div className="App" style={{ height:'100%' }}>
+                <Layout style={{ height:'100%' }}>
+                    { menuList.length>1 ? customSider : '' }
+                    <Layout>
+                        { menuList.length>1 ? customHeader : '' }
+                        { menuList.length>1 ? customBreadCrumb : '' }
+                        <Content id="container" className={'content-body'} style={{ padding:'0 15px 15px 15px' }}>
+                            { menuList.length>1 ? customContainer : <Route path={routers.Login.path} component={routers.Login.component}/> }
+                        </Content>
+                        <Footer className={'app-footer'}>Ant Design ©2018 Created by Ant UED</Footer>
                     </Layout>
-                </div>
-            );
-        } else {
-            // 清空
-            return(
-                <div className="App" style={{ height:'100%' }}>
-                    <Route path={routers.Login.path} component={routers.Login.component}/>
-                </div>
-            )
-        }
+                </Layout>
+            </div>
+        );
     }
 }
 
