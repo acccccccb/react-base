@@ -2,7 +2,6 @@ import '../../assets/scss/App.scss'
 import 'perfect-scrollbar/css/perfect-scrollbar.css'
 import React from 'react'
 import store from '../../store/index'
-import PerfectScrollbar from 'perfect-scrollbar'
 import { Route, Switch } from 'react-router-dom'
 import routers from '../../router/index'
 import HeadMenu from '../../base/HeadMenu'
@@ -19,10 +18,6 @@ class App extends React.Component {
     // 组件初始化执行, 并且只执行一次
     componentDidMount() {
         console.log('组件初始化执行, 并且只执行一次');
-        new PerfectScrollbar('#container', {
-            wheelSpeed: 1,
-            wheelPropagation: true
-        });
     }
     // 组件卸载的时候才会执行, 可以做销毁动作
     componentWillUnmount() {
