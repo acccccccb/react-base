@@ -18,7 +18,7 @@
     }
   }
   .app-sider {
-    box-shadow: 5px 0 20px rgba(200,200,200,0.3);
+    box-shadow: 5px 0 20px rgba(0,0,0,0.2);
     .collapsed-btn {
       position: absolute;
       top:50%;
@@ -55,16 +55,14 @@
   }
   .content-body {
     overflow-y:scroll;
-    .site-layout-content {
+      .site-layout-content {
       user-select:text;
       background:#fff;
-      padding:20px;
-      box-shadow: 0 5px 20px rgba(200,200,200,0.3);
+      margin:0 15px;
     }
   }
   .app-footer {
     text-align:center;
-    background:$grayBgLight;
     color:$secondaryText;
     padding:10px 50px;
     font-size:10px;

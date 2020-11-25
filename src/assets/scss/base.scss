@@ -5,3 +5,9 @@
   content:'';
   display:table;
 }
+.dark {
+    background: $darkBg;
+}
+.light {
+    background:$grayBg;
+}

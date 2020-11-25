@@ -3,7 +3,7 @@ import { MehTwoTone } from '@ant-design/icons'
 
 function NoMatch(){
     return(
-        <div style={{margin:'100px auto',textAlign:'center'}}>
+        <div style={{margin:'auto',textAlign:'center',padding: '100px'}}>
             <div style={{fontSize:'3em'}}>
                 <MehTwoTone />
             </div>

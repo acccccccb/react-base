@@ -118,7 +118,7 @@ class App extends React.Component {
         );
         let customBreadCrumb = <BreadCrumb></BreadCrumb>;
         let customContainer = (
-            <div className="site-layout-content">
+            <div className="site-layout-content" style={{padding: '0 15px 15px 15px'}}>
                 <Switch>
                     {
                         store.getState().menuList.map((item)=>{
@@ -142,16 +142,16 @@ class App extends React.Component {
             </div>
         );
         return (
-            <div className="App" style={{ height:'100%' }}>
+            <div className={ 'App ' + theme } style={{ height:'100%' }}>
                 <Layout style={{ height:'100%' }}>
                     { menuList.length>1 ? customSider : '' }
                     <Layout>
                         { menuList.length>1 ? customHeader : '' }
                         { menuList.length>1 ? customBreadCrumb : '' }
-                        <Content id="container" className={'content-body'} style={{ padding:'0 15px 15px 15px' }}>
+                        <Content id="container" className={'content-body'} style={{ padding:'0' }}>
                             { menuList.length>1 ? customContainer : <Route path={routers.Login.path} component={routers.Login.component}/> }
                         </Content>
-                        <Footer className={'app-footer'}>Ant Design ©2018 Created by Ant UED</Footer>
+                        <Footer className={'app-footer ' + theme}>Ant Design ©2018 Created by Ant UED</Footer>
                     </Layout>
                 </Layout>
             </div>

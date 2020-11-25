@@ -79,8 +79,9 @@ class HeadMenu extends React.Component <{
         return result;
     }
     render(){
+        const theme = store.getState().theme;
         return (
-            <div className="head-menu-box">
+            <div className={'head-menu-box ' + theme }>
                 <div className="head-menu">
                     {
                         store.getState().tabList.map((item,index) => (

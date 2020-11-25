@@ -52,7 +52,7 @@ class Login extends React.Component {
         });
     };
     render(){
-        const theme = store.getState().theme;
+        let theme = store.getState().theme;
         return(
             <div className={'login-card-box ' + theme}>
                 <Card className='login-card'>
