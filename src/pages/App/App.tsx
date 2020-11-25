@@ -1,6 +1,8 @@
 import '../../assets/scss/App.scss'
+import 'perfect-scrollbar/css/perfect-scrollbar.css'
 import React from 'react'
 import store from '../../store/index'
+import PerfectScrollbar from 'perfect-scrollbar'
 import { Route, Switch } from 'react-router-dom'
 import routers from '../../router/index'
 import HeadMenu from '../../base/HeadMenu'
@@ -9,14 +11,18 @@ import BreadCrumb from '../../base/BreadCrumb'
 import { Layout } from "antd"
 import { BulbOutlined,BulbFilled,RightOutlined,LeftOutlined } from '@ant-design/icons'
 import { connect } from 'react-redux'
-import {setToken, setMenuList, setTheme, setCollapsed, setActiveUrl} from "../../store/action"
+import {setToken, setMenuList, setTheme, setCollapsed} from "../../store/action"
 import $http from '../../request/http'
-const { Header, Footer, Sider,Content } = Layout;
+const { Header, Footer, Sider,Content } = Layout
 
 class App extends React.Component {
     // 组件初始化执行, 并且只执行一次
     componentDidMount() {
         console.log('组件初始化执行, 并且只执行一次');
+        new PerfectScrollbar('#container', {
+            wheelSpeed: 1,
+            wheelPropagation: true
+        });
     }
     // 组件卸载的时候才会执行, 可以做销毁动作
     componentWillUnmount() {
@@ -97,7 +103,7 @@ class App extends React.Component {
                             <Header style={{ padding:0,background:'none' }}>
                                 <HeadMenu/>
                             </Header>
-                            <Content className={'content-body'} style={{ padding:'15px' }}>
+                            <Content id="container" className={'content-body'} style={{ padding:'15px' }}>
                                 <BreadCrumb></BreadCrumb>
                                 <div className="site-layout-content">
                                     <Switch>

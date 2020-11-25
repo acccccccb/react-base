@@ -52,8 +52,9 @@ class Login extends React.Component {
         });
     };
     render(){
+        const theme = store.getState().theme;
         return(
-            <div className='login-card-box'>
+            <div className={'login-card-box ' + theme}>
                 <Card className='login-card'>
                     <div className='login-card-logo'>
                         <Avatar className="spin" size={70} src={Logo} shape="circle"/>

@@ -4,10 +4,10 @@
   position:relative;
   overflow: hidden;
   height: 64px;
+  box-shadow: 0 5px 20px rgba(200,200,200,0.3);
   .head-menu {
     background:#fff;
     margin-right:$userInfoBoxWidth;
-    box-shadow: 0 5px 20px rgba(200,200,200,0.3);
     .head-menu-item {
       position:relative;
       display:inline-block;
