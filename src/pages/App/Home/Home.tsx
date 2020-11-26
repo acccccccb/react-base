@@ -3,7 +3,7 @@ import config from '../../../../package.json'
 import KeepAlive from 'react-activation'
 import store from '../../../store/index'
 import { connect } from 'react-redux'
-import { Button,Tabs,Table,message,Modal,Tag,PageHeader, Descriptions  } from 'antd';
+import { Button,Space,Tabs,Table,message,Modal,Tag,PageHeader, Descriptions  } from 'antd';
 import $http from '../../../request/http'
 import { setToken } from '../../../store/action/index'
 const TabPane = Tabs.TabPane;
@@ -37,6 +37,7 @@ class HomeTable extends React.Component{
                    bordered
                    locale={ {emptyText:"暂无数据"} }
                    size={'small'}
+                   scroll={{ y: 500 }}
                    dataSource={this.state['dataSource']}>
                 <Column title="First Name" dataIndex="firstName" key="firstName" />
                 <Column title="Last Name" dataIndex="lastName" key="lastName" />
@@ -170,12 +171,14 @@ class Home extends React.Component{
                             <div style={{marginBottom:'50px'}}>
                                 TOKEN:{ store.getState().token }
                             </div>
-                            <Button style={{marginRight:'10px'}} type="primary" onClick={this.get}>发送get请求</Button>
-                            <Button style={{marginRight:'10px'}} type="primary" onClick={this.post}>发送post请求</Button>
-                            <Button style={{marginRight:'10px'}} type="primary" onClick={this.changeStore}>修改TOKEN</Button>
-                            <Button style={{marginRight:'10px'}} type="primary" onClick={this.getMenuList}>修改MENULIST</Button>
-                            <Button style={{marginRight:'10px'}} type="primary" onClick={this.showModal}>对话框</Button>
-                            <Button style={{marginRight:'10px'}} type="primary" onClick={this.goTo404}>404</Button>
+                            <Space>
+                                <Button type="primary" onClick={this.get}>发送get请求</Button>
+                                <Button type="primary" onClick={this.post}>发送post请求</Button>
+                                <Button type="primary" onClick={this.changeStore}>修改TOKEN</Button>
+                                <Button type="primary" onClick={this.getMenuList}>修改MENULIST</Button>
+                                <Button type="primary" onClick={this.showModal}>对话框</Button>
+                                <Button type="primary" onClick={this.goTo404}>404</Button>
+                            </Space>
                         </TabPane>
                     </Tabs>
                     <Modal
