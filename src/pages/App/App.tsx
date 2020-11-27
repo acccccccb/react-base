@@ -71,7 +71,12 @@ class App extends React.Component {
             $http.get('/menuList').then((res)=>{
                 store.dispatch(setMenuList(res.obj.rows));
                 const activeUrl = store.getState().activeUrl;
-                if(activeUrl) {
+                // 判断下当前activeUrl是否在路由里 如果不在就返回首页
+                const auth = Object.keys(routers);
+                const filter = auth.filter((item) => {
+                    return routers[item].path === activeUrl;
+                });
+                if(activeUrl && filter.length > 0) {
                     this.props['history'].push(activeUrl);
                 } else {
                     this.props['history'].push(routers.Home.path);
@@ -118,7 +123,7 @@ class App extends React.Component {
         );
         let customBreadCrumb = <BreadCrumb></BreadCrumb>;
         let customContainer = (
-            <div className="site-layout-content" style={{padding: '0 15px 15px 15px'}}>
+            <div className="site-layout-content" style={{padding: '15px'}}>
                 <Switch>
                     {
                         store.getState().menuList.map((item)=>{

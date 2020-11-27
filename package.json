@@ -10,6 +10,7 @@
         "dev": "cross-env NODE_ENV=development node scripts/start.js",
         "start": "cross-env NODE_ENV=development node scripts/start.js",
         "prod": "cross-env NODE_ENV=production node scripts/start.js",
+        "new:page": "node scripts/create.js page",
         "build:test": "cross-env NODE_ENV=development node scripts/build.js",
         "build:prod": "cross-env NODE_ENV=production node scripts/build.js",
         "test": "node scripts/test.js"
@@ -49,7 +50,6 @@
         "eslint-plugin-react-hooks": "^1.6.1",
         "file-loader": "4.3.0",
         "font-awesome": "^4.7.0",
-        "fs-extra": "^8.1.0",
         "html-webpack-plugin": "4.0.0-beta.11",
         "identity-obj-proxy": "3.0.0",
         "jest": "24.9.0",
@@ -108,6 +108,7 @@
     },
     "devDependencies": {
         "cross-env": "^7.0.2",
+        "fs-extra": "^8.1.0",
         "js-base64": "^3.6.0",
         "mockjs": "^1.1.0",
         "node-sass": "^4.14.1",

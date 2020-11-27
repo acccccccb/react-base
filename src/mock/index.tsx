@@ -80,6 +80,13 @@ Mock.mock('/menuList','get',()=>{
                         route:'List',
                     },
                     {
+                        id:9,
+                        name:'ABC',
+                        type:2,
+                        icon:'fa fa-calendar',
+                        route:'Abc',
+                    },
+                    {
                         id:3,
                         name:'异常页',
                         icon:'fa fa-bars',
