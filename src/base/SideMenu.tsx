@@ -6,6 +6,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 import { Menu } from "antd";
 import LogoSvg from "../static/images/logo.svg";
 import { setActiveUrl} from "../store/action";
+import routers from "../router";
 const { SubMenu } = Menu;
 
 class SideMenu extends React.Component<{
@@ -88,11 +89,23 @@ class SideMenu extends React.Component<{
                     {
                         menuList.map((item) => {
                             if(item.type===2) {
-                                return (
-                                    <Menu.Item key={item.id}>
-                                        <NavLink activeClassName="side-menu-active" data-id={item.id} to={router[item.route].path}><i className={item.icon}></i> <span className="menu-item-title">{item.name}</span></NavLink>
-                                    </Menu.Item>
-                                )
+                                if(routers[item.route]) {
+                                    return (
+                                        <Menu.Item key={item.id}>
+                                            <NavLink activeClassName="side-menu-active" data-id={item.id} to={router[item.route].path}><i className={item.icon}></i> <span className="menu-item-title">{item.name}</span></NavLink>
+                                        </Menu.Item>
+                                    )
+                                } else {
+                                    return(
+                                        <div style={{
+                                            color: 'red',
+                                            padding: '0 24px',
+                                            lineHeight: '40px'
+                                        }}>
+                                            Err menu: { item.name }
+                                        </div>
+                                    );
+                                }
                             } else {
                                 if(item.children) {
                                     return (

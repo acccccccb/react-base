@@ -15,7 +15,7 @@ if( args[0] === 'page') {
     input.question('Input page name：', (pageName) => {
         if(pageName) {
             pageName = _.upperFirst(pageName);
-            let file = fs.readFileSync(`${dir}/template/page.txt`, 'utf8');
+            let file = fs.readFileSync(`${dir}/template/page.tpl`, 'utf8');
             file = file.replace(RegExp('NEW_PAGE', 'g'), pageName);
             const newPageFile = `${dir}\\src\\pages\\App\\${pageName}\\${pageName}.tsx`;
             fs.pathExists(newPageFile).then((exists) => {

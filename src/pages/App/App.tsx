@@ -11,7 +11,7 @@ import BreadCrumb from '../../base/BreadCrumb'
 import { Layout } from "antd"
 import { BulbOutlined,BulbFilled,RightOutlined,LeftOutlined } from '@ant-design/icons'
 import { connect } from 'react-redux'
-import {setToken, setMenuList, setTheme, setCollapsed} from "../../store/action"
+import {setToken, setMenuList, setTheme, removeTabList, setCollapsed} from "../../store/action"
 import $http from '../../request/http'
 const { Header, Footer, Sider,Content } = Layout
 
@@ -52,6 +52,8 @@ class App extends React.Component {
     constructor(props) {
         console.log('挂载');
         super(props);
+        // 检查一遍tabList是否有不存在的路由 如果有则清除
+        this.checkRouters();
         this.state =  {
             routers:[],
         };
@@ -64,6 +66,18 @@ class App extends React.Component {
     changeMenuTheme(){
         let theme = store.getState().theme;
         store.dispatch(setTheme(theme==='dark'?'light':'dark'));
+    }
+    checkRouters() {
+        console.log('checkRouters');
+        store.getState().tabList.forEach((item, index) => {
+            const auth = Object.keys(routers);
+            const filter = auth.filter((routerItem) => {
+                return routerItem === item.route;
+            });
+            if(filter.length === 0) {
+                store.dispatch(removeTabList(index));
+            }
+        });
     }
     checkLogin () {
         let token = store.getState().token;
@@ -128,9 +142,11 @@ class App extends React.Component {
                     {
                         store.getState().menuList.map((item)=>{
                             if(item.type===2) {
-                                return(
-                                    <Route key={item.id} path={routers[item.route].path} exact={routers[item.route].exact} component={routers[item.route].component}/>
-                                )
+                                if(routers[item.route]) {
+                                    return(
+                                        <Route key={item.id} path={routers[item.route].path} exact={routers[item.route].exact} component={routers[item.route].component}/>
+                                    )
+                                }
                             } else {
                                 return(
                                     item.children.map((childItem)=>{

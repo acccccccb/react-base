@@ -1,4 +1,3 @@
-import Abc from '../pages/App/Abc/Abc'
 import App from '../pages/App/App'
 import Home from '../pages/App/Home/Home'
 import List from '../pages/App/List/List'
@@ -48,12 +47,6 @@ const routes = {
         path:'/403',
         exact: true,
         component: NoPermission,
-    },
-    Abc: {
-        name: 'Abc',
-        path: '/Abc',
-        exact: true,
-        component: Abc
     },
 };
 export default routes;
