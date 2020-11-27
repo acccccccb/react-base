@@ -19,7 +19,7 @@ class Login extends React.Component {
         password: '',
         type: 'text'
     };
-    componentWillMount(): void {
+    UNSAFE_componentWillMount(): void {
         const username = localStorage.getItem('6dfaa7bd-cd4a-437c-809c-94a10ccf6952') || '';
         const password = localStorage.getItem('c0f8726a-c324-4c61-b66f-348eb5c7c530') || '';
         this.setState({
@@ -137,7 +137,7 @@ class Login extends React.Component {
                                 </Checkbox>
                             </div>
                             <div className="text-right inline-block w50">
-                                <a href="#">忘记密码？</a>
+                                <a href="http://www.baidu.com">忘记密码？</a>
                             </div>
                         </div>
                         <Form.Item>

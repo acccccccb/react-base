@@ -68,7 +68,6 @@ class App extends React.Component {
         store.dispatch(setTheme(theme==='dark'?'light':'dark'));
     }
     checkRouters() {
-        console.log('checkRouters');
         store.getState().tabList.forEach((item, index) => {
             const auth = Object.keys(routers);
             const filter = auth.filter((routerItem) => {
@@ -109,7 +108,6 @@ class App extends React.Component {
         }
     }
     render() {
-        console.log('app render');
         let menuList = store.getState().menuList;
         let theme = store.getState().theme;
         let collapsed = store.getState().collapsed;
@@ -146,6 +144,8 @@ class App extends React.Component {
                                     return(
                                         <Route key={item.id} path={routers[item.route].path} exact={routers[item.route].exact} component={routers[item.route].component}/>
                                     )
+                                } else {
+                                    return('');
                                 }
                             } else {
                                 return(
