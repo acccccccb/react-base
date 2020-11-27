@@ -1,6 +1,116 @@
 // base scss
 @import "~font-awesome";
 @import "color";
+// 公共样式
+// display
+.block { display: block; }
+.inline { display: inline; }
+.inline-block { display: inline-block; }
+.border-box { box-sizing: border-box; }
+.overflow-hidden { overflow: hidden;}
+.v-top { vertical-align: top; }
+.v-center { vertical-align: center; }
+.v-bottom { vertical-align: bottom; }
+// padding
+.no-padding { padding: 0; }
+.padding { padding: 32px; }
+.pl { padding-left: 32px; }
+.pr { padding-right: 32px; }
+.pt { padding-top: 32px; }
+.pb { padding-bottom: 32px; }
+.pt0 { padding-top: 0; }
+.pb0 { padding-bottom: 0; }
+.pl0 { padding-left: 0; }
+.pr0 { padding-right: 0; }
+// padding-xs
+.padding-xs { padding: 16px; }
+.pl-xs { padding-left: 16px; }
+.pr-xs { padding-right: 16px; }
+.pt-xs { padding-top: 16px; }
+.pb-xs { padding-bottom: 16px; }
+// padding-lg
+.padding-lg { padding: 64px; }
+.pl-lg { padding-left: 64px; }
+.pr-lg { padding-right: 64px; }
+.pt-lg { padding-top: 64px; }
+.pb-lg { padding-bottom: 64px; }
+// margin
+.no-margin { margin: 0; }
+.margin { margin: 32px; }
+.mt0 { margin-top: 0; }
+.mb0 { margin-bottom: 0; }
+.ml0 { margin-left: 0; }
+.mr0 { margin-right: 0; }
+.mt50 {margin-top: 50%; }
+.mt { margin-top: 32px; }
+.ml { margin-left: 32px; }
+.mr { margin-right: 32px; }
+.mb { margin-bottom: 32px; }
+// 垂直居中
+.margin-t-center,.mt-center {
+    margin-top: 50%;
+}
+// 字体大小
+.text-0 {
+    font-size: 0;
+    line-height: 0;
+}
+$uni-font-size-base: 14px;
+$uni-font-size-lg: 16px;
+$uni-font-size-sm: 12px;
+$uni-font-size-xs: 10px;
+.text-base { font-size: $uni-font-size-base; }
+.text-base-2x { font-size: $uni-font-size-base * 2 }
+.text-base-3x { font-size: $uni-font-size-base * 3 }
+.text-sm { font-size: $uni-font-size-sm; }
+.text-xs { font-size: $uni-font-size-xs; }
+.text-sm-2x { font-size: $uni-font-size-sm * 2; }
+.text-sm-3x { font-size: $uni-font-size-sm * 3; }
+.text-lg { font-size: $uni-font-size-lg; }
+.text-lg-2x { font-size: $uni-font-size-lg * 2; }
+.text-lg-3x { font-size: $uni-font-size-lg * 3; }
+// 字体下划线
+.text-underline { text-decoration: underline; }
+// 上划线
+.text-overline { text-decoration: overline; }
+// 删除线
+.text-line-through { text-decoration: line-through; }
+// 字体排版
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+// 字重
+.text-bold { font-weight: bold; }
+.text-normal { font-weight: normal; }
+// 行高
+.text-line-height-100 { line-height: 100% }
+.text-line-height-120 { line-height: 120% }
+.text-line-height-150 { line-height: 150% }
+.text-line-height-200 { line-height: 200% }
+// 不换行
+.text-nowrap {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.h100 { height:100%; }
+.w10 { width: 10%; }
+.w20 { width: 20%; }
+.w30 { width: 30%; }
+.w40 { width: 40%; }
+.w50 { width: 50%; }
+.w60 { width: 60%; }
+.w70 { width: 70%; }
+.w80 { width: 80%; }
+.w90 { width: 90%; }
+.w100 { width: 100%; }
+// 定位
+.fl { float: left; }
+.fr { float: right; }
+.clear { clear: both; }
+.fixed { position: fixed; }
+.absolute { position: absolute; }
+.relative { position: relative; }
 #root:before,.App:before {
   content:'';
   display:table;

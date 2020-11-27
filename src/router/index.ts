@@ -3,6 +3,9 @@ import Home from '../pages/App/Home/Home'
 import List from '../pages/App/List/List'
 import Login from '../pages/App/Login/Login'
 import NoMatch from '../pages/App/NoMatch/NoMatch'
+import Error from '../pages/App/Error/Error'
+import NoPermission from '../pages/App/NoPermission/NoPermission'
+
 const routes = {
     App:{
         path:'/',
@@ -29,9 +32,21 @@ const routes = {
     },
     NoMatch:{
         name:'404',
-        path:'/NoMatch',
+        path:'/404',
         exact: true,
         component: NoMatch,
+    },
+    Error:{
+        name:'500',
+        path:'/500',
+        exact: true,
+        component: Error,
+    },
+    NoPermission:{
+        name:'403',
+        path:'/403',
+        exact: true,
+        component: NoPermission,
     },
 };
 export default routes;

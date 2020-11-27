@@ -81,16 +81,30 @@ Mock.mock('/menuList','get',()=>{
                     },
                     {
                         id:3,
-                        name:'菜单组',
+                        name:'异常页',
                         icon:'fa fa-bars',
                         type:1,
                         children:[
                             {
                                 id:4,
+                                name:'403',
+                                icon:'fa fa-cube',
+                                type:2,
+                                route:'NoPermission',
+                            },
+                            {
+                                id:5,
                                 name:'404',
                                 icon:'fa fa-cube',
                                 type:2,
                                 route:'NoMatch',
+                            },
+                            {
+                                id:6,
+                                name:'500',
+                                icon:'fa fa-cube',
+                                type:2,
+                                route:'Error',
                             },
                         ]
                     },
