@@ -1,5 +1,4 @@
 import React from 'react';
-import { MehTwoTone } from '@ant-design/icons'
 
 function NoPermission(){
     return(

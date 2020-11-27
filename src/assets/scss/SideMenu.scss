@@ -1,57 +1,72 @@
 @import "color";
+
 .logo {
-  position:relative;
-  .logo-title {
-    font-size:.8em;
-  }
+    position: relative;
+
+    .logo-title {
+        font-size: .8em;
+    }
 
 }
+
 .side-menu-dark {
-  background:#001529;
-  transition: background .5s;
-  .logo {
-    color:#fff!important;
-    box-shadow: none!important;
-  }
+    background: #001529;
+    transition: background .5s;
+
+    .logo {
+        color: #fff !important;
+        box-shadow: none !important;
+    }
 }
+
 .side-menu {
-  height:100%;
-  position: relative;
-  .logo {
-    height:63px;
-    line-height:63px;
-    font-size:22px;
-    color:$logoTitleText;
-    box-shadow: 0 5px 20px rgba(200,200,200,0.6);
-    .logo-img {
-      width:55px;
-      line-height:0;
-      font-size:0;
-      margin-top:-5px;
-      transition: width .3s;
+    height: 100%;
+    position: relative;
+
+    .ant-menu-item {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
     }
-    .logo-title {
-      opacity: 1;
-      transition: opacity 2s;
+
+    .logo {
+        height: 64px;
+        line-height: 64px;
+        font-size: 22px;
+        color: $logoTitleText;
+
+        .logo-img {
+            width: 55px;
+            line-height: 0;
+            font-size: 0;
+            margin-top: -5px;
+            transition: width .3s;
+        }
+
+        .logo-title {
+            opacity: 1;
+            transition: opacity 2s;
+        }
     }
-  }
 }
+
 .side-menu-collapsed {
-  .logo {
-    .logo-img {
-      width:70px;
-      margin-left:5px;
+    .logo {
+        .logo-img {
+            width: 70px;
+            margin-left: 5px;
+        }
+
+        .logo-title {
+            opacity: 0;
+            transition: opacity 1s;
+            display: inline-block;
+            overflow: hidden;
+            position: absolute;
+            width: 140px;
+        }
     }
-    .logo-title {
-      opacity: 0;
-      transition: opacity 1s;
-      display:inline-block;
-      overflow:hidden;
-      position:absolute;
-      width:140px;
+
+    .menu-item-title {
+        display: none;
     }
-  }
-  .menu-item-title {
-    display:none;
-  }
 }

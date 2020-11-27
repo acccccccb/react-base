@@ -97,7 +97,7 @@ class HeadMenu extends React.Component <{
                 <div className="user-info-box">
                     <div className="user-info-box-1">
                         <Badge count={1} size="small">
-                            <Button onClick={()=>{this.props.history.push(router.List.path)}} type="primary" shape="circle" icon={<MessageOutlined />} />
+                            <Button onClick={()=>{this.props.history.push(router.List.path)}} type="default" shape="circle" icon={<MessageOutlined />} />
                         </Badge>
                     </div>
                     <div className="user-info-box-2">

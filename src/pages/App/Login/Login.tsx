@@ -1,9 +1,10 @@
 import '../../../assets/scss/Login.scss'
 import React from 'react';
 // import HeadImg from '../../../static/images/avatar.jpg'
+import { encode, decode } from 'js-base64'
 import Logo from '../../../static/images/logo.svg'
 import { withRouter } from "react-router-dom";
-import {Card, Form, Input, Button, message, Avatar} from 'antd';
+import {Card, Form, Input, Checkbox, Button, message, Avatar} from 'antd';
 import { UserOutlined, EllipsisOutlined, CheckOutlined } from '@ant-design/icons';
 import $http from '../../../request/http'
 import store from '../../../store/index'
@@ -12,8 +13,21 @@ import routers from "../../../router";
 class Login extends React.Component {
     state={
         loginBtnLoading:false,
+        theme: store.getState().theme,
+        isSave: localStorage.getItem('isSave') === 'true',
+        username: '',
+        password: '',
+        type: 'text'
     };
-    getMenuList = ()=>{
+    componentWillMount(): void {
+        const username = localStorage.getItem('6dfaa7bd-cd4a-437c-809c-94a10ccf6952') || '';
+        const password = localStorage.getItem('c0f8726a-c324-4c61-b66f-348eb5c7c530') || '';
+        this.setState({
+            username: username ? decode(username) : '-',
+            password: username ? decode(password) : '',
+        })
+    }
+    getMenuList = () => {
         $http.get('/menuList').then((res)=>{
             if(res.success===true) {
                 store.dispatch(setMenuList(res.obj.rows));
@@ -23,11 +37,19 @@ class Login extends React.Component {
             }
         });
     };
-    onFinish = formData => {
+    onFinish = (formData) => {
         let data = new URLSearchParams(formData);
         this.setState({
             loginBtnLoading:true,
         });
+        console.log(formData);
+        if(localStorage.getItem('isSave') === 'true') {
+            localStorage.setItem('6dfaa7bd-cd4a-437c-809c-94a10ccf6952', encode(formData.username));
+            localStorage.setItem('c0f8726a-c324-4c61-b66f-348eb5c7c530', encode(formData.password));
+        } else {
+            localStorage.removeItem('6dfaa7bd-cd4a-437c-809c-94a10ccf6952');
+            localStorage.removeItem('c0f8726a-c324-4c61-b66f-348eb5c7c530');
+        }
         $http.post('/login',data).then((res)=>{
             if(res.success===true) {
                 store.dispatch(setToken(res.obj.token));
@@ -51,10 +73,22 @@ class Login extends React.Component {
             });
         });
     };
+    savePassword = (e) => {
+        if(e.target.checked === true) {
+            localStorage.setItem('isSave', 'true');
+        } else {
+            localStorage.setItem('isSave', 'false');
+        }
+        this.setState({
+            isSave: e.target.checked
+        })
+    };
+    selectAll = (e) => {
+        e.currentTarget.select();
+    };
     render(){
-        let theme = store.getState().theme;
         return(
-            <div className={'login-card-box ' + theme}>
+            <div className={'login-card-box ' + this.state.theme}>
                 <Card className='login-card'>
                     <div className='login-card-logo'>
                         <Avatar className="spin" size={70} src={Logo} shape="circle"/>
@@ -62,8 +96,8 @@ class Login extends React.Component {
                     </div>
                     <Form
                         initialValues={{
-                            username:'admin',
-                            password:'123456',
+                            username: this.state.username,
+                            password: this.state.password,
                         }}
                         autoComplete="off"
                         name="normal_login"
@@ -75,18 +109,37 @@ class Login extends React.Component {
                             rules={[{ required: true, message: 'Please input your username!' }]}>
                             <Input
                                 allowClear
-                                disabled={this.state['loginBtnLoading']}
+                                autoFocus={ true }
+                                onFocus={ this.selectAll }
+                                disabled={this.state.loginBtnLoading}
                                 prefix={<UserOutlined className="site-form-item-icon" />}
+                                value={this.state.username}
                                 placeholder="用户名"/>
                         </Form.Item>
                         <Form.Item
                             name="password"
                             rules={[{ required: true, message: 'Please input your password!' }]}>
                             <Input.Password
-                                disabled={this.state['loginBtnLoading']}
+                                onFocus={ this.selectAll }
+                                disabled={this.state.loginBtnLoading}
                                 prefix={<EllipsisOutlined className="site-form-item-icon" />}
-                                placeholder="密码" type="password"/>
+                                placeholder="密码"
+                                type="password"
+                            />
                         </Form.Item>
+                        <div className="mb">
+                            <div className="inline-block w50">
+                                <Checkbox
+                                    onChange={this.savePassword}
+                                    checked={this.state.isSave}
+                                >
+                                    记住密码
+                                </Checkbox>
+                            </div>
+                            <div className="text-right inline-block w50">
+                                <a href="#">忘记密码？</a>
+                            </div>
+                        </div>
                         <Form.Item>
                             <Button loading={this.state['loginBtnLoading']} block icon={<CheckOutlined />} type="primary" htmlType="submit">login</Button>
                         </Form.Item>

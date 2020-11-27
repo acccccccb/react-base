@@ -37,7 +37,6 @@ class HomeTable extends React.Component{
                    bordered
                    locale={ {emptyText:"暂无数据"} }
                    size={'small'}
-                   scroll={{ y: 500 }}
                    dataSource={this.state['dataSource']}>
                 <Column title="First Name" dataIndex="firstName" key="firstName" />
                 <Column title="Last Name" dataIndex="lastName" key="lastName" />
