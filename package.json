@@ -11,6 +11,7 @@
         "start": "cross-env NODE_ENV=development node scripts/start.js",
         "prod": "cross-env NODE_ENV=production node scripts/start.js",
         "new:page": "node scripts/create.js page",
+        "new:comp": "node scripts/create.js comp",
         "build:test": "cross-env NODE_ENV=development node scripts/build.js",
         "build:prod": "cross-env NODE_ENV=production node scripts/build.js",
         "test": "node scripts/test.js"
