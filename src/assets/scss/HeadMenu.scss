@@ -14,6 +14,8 @@
             padding-right: 20px;
             color: $secondaryText;
             transition: background .5s;
+            box-sizing: border-box;
+            height: 64px;
         }
 
         a:hover {
@@ -22,8 +24,8 @@
         }
 
         a.active {
-            background: $grayBg;
-            color: $primaryText;
+            background: $grayBgLight;
+            color: $mainColor;
 
             .head-menu-item-close-active {
                 opacity: .5;
